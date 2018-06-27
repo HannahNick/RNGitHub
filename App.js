@@ -18,60 +18,30 @@ import {
 import Boy from "./Boy";
 import FirstActivity from "./activity/FirstActivity";
 import SecondActivity from "./activity/SecondActivity";
+import MainActivity from "./activity/MainActivity";
 
 export default class App extends Component<props> {
+
+    state={
+      mIntent: this.props.navigation
+    };
+
     constructor(props) {
         super(props);
-        this.state = {
-            selectedTab: 'home',
-        }
 
     }
 
+    componentDidMount() {
+        const {navigate} = this.props.navigation;
+        setTimeout(()=>{
+           navigate("PhoneLoginActivity");
+        },2000);
+    }
 
     render() {
-        const {navigate} = this.props.navigation;
+
         return (
             <View style={styles.container}>
-                {/*<TabNavigator hidesTabTouch={true}>
-                    <TabNavigator.Item
-                        tabStyle={styles.bottomMenu}
-                        selected={this.state.selectedTab === 'home'}
-                        renderIcon={() => <Image style={styles.fragmentIcon} source={require('./res/images/home_def.png')}/>}
-                        renderSelectedIcon={() => <Image style={styles.fragmentIcon} source={require('./res/images/home_sel.png')}/>}
-                        onPress={() => this.setState({selectedTab: 'home'})}>
-                        <View style={styles.fragmentContain}>
-                            <Text>首页</Text>
-                        </View>
-                    </TabNavigator.Item>
-                    <TabNavigator.Item
-                        selected={this.state.selectedTab === 'classification'}
-                        renderIcon={() => <Image style={styles.fragmentIcon} source={require('./res/images/classification_def.png')}/>}
-                        renderSelectedIcon={() => <Image style={styles.fragmentIcon} source={require('./res/images/classification_sel.png')}/>}
-                        onPress={() => this.setState({selectedTab: 'classification'})}>
-                        <View style={styles.fragmentContain}>
-                            <Text>分类</Text>
-                        </View>
-                    </TabNavigator.Item>
-                    <TabNavigator.Item
-                        selected={this.state.selectedTab === 'shopping'}
-                        renderIcon={() => <Image style={styles.fragmentIcon} source={require('./res/images/Shopping_def.png')}/>}
-                        renderSelectedIcon={() => <Image style={styles.fragmentIcon} source={require('./res/images/Shopping_sel.png')}/>}
-                        onPress={() => this.setState({selectedTab: 'shopping'})}>
-                        <View style={styles.fragmentContain}>
-                            <Text>购物车</Text>
-                        </View>
-                    </TabNavigator.Item>
-                    <TabNavigator.Item
-                        selected={this.state.selectedTab === 'me'}
-                        renderIcon={() => <Image style={styles.fragmentIcon} source={require('./res/images/my_def.png')}/>}
-                        renderSelectedIcon={() => <Image style={styles.fragmentIcon} source={require('./res/images/my_sel.png')}/>}
-                        onPress={() => this.setState({selectedTab: 'me'})}>
-                        <View style={styles.fragmentContain}>
-                            <Text>我的</Text>
-                        </View>
-                    </TabNavigator.Item>
-                </TabNavigator>*/}
                 {/*<Navigator
                     //1.先导入navigator组件
                     //2.初始化路由
@@ -95,9 +65,15 @@ export default class App extends Component<props> {
                     }}
 
                 />*/}
-                <Text onPress={()=>{
-                    navigate("FirstActivity",{word:"APP传来了一个参数"})
-                }}>跳转到第一个页面</Text>
+                <Image
+                    style={{flex:1,alignItems:'center',justifyContent:'center'}}
+                    resizeMode='contain'
+                    source={require('./res/images/launcher_back_ground.png')}/>
+                {/*<Text*/}
+                    {/*style={{backgroundColor:'skyblue'}}*/}
+                    {/*onPress={()=>{*/}
+                    {/*navigate("MainActivity",{word:"APP传来了一个参数"});*/}
+                {/*}}>跳转到第一个页面</Text>*/}
             </View>
         );
     }
@@ -106,7 +82,9 @@ export default class App extends Component<props> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F5FCFF',
+        justifyContent:'center',
+        backgroundColor: '#fff',
+        alignItems:'center',
     },
     instructions: {
         textAlign: 'center',
