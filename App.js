@@ -39,7 +39,7 @@ export default class App extends Component<props> {
     }
 
     render() {
-
+        // const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
                 {/*<Navigator
@@ -72,7 +72,7 @@ export default class App extends Component<props> {
                 {/*<Text*/}
                     {/*style={{backgroundColor:'skyblue'}}*/}
                     {/*onPress={()=>{*/}
-                    {/*navigate("MainActivity",{word:"APP传来了一个参数"});*/}
+                    {/*navigate("FirstActivity",{word:"APP传来了一个参数"});*/}
                 {/*}}>跳转到第一个页面</Text>*/}
             </View>
         );

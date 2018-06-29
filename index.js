@@ -9,12 +9,12 @@ import PhoneLoginActivity from "./activity/PhoneLoginActivity";
 
 const Nick = StackNavigator({
     App:{screen:App},
+    PhoneLoginActivity:{screen:PhoneLoginActivity},
     FirstActivity:{screen:FirstActivity},
     SecondActivity:{screen:SecondActivity},
     MainActivity:{screen:MainActivity},
-    PhoneLoginActivity:{screen:PhoneLoginActivity},
 },{
-    initialRouteName:'PhoneLoginActivity',
+    initialRouteName:'App',
     headerMode:'none',
 });
 

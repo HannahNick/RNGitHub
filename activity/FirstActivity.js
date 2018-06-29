@@ -33,10 +33,13 @@ export default class FirstActivity extends Component{
             >点击往下一个页面传值</Text>*/}
             <Text style={styles.fontType}
                   onPress={()=>{
-                navigate('SecondActivity')
+                navigate('PhoneLoginActivity')
             }}>推荐跳转方式2</Text>
             <Text style={styles.text}>{this.props.navigation.state.params.word}</Text>
-
+            <Text style={styles.fontType}
+                  onPress={()=>{
+                      navigate('App')
+                  }}>推荐跳转方式5</Text>
         </View>)
     }
 }
