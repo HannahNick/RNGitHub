@@ -14,7 +14,7 @@ const Nick = StackNavigator({
     SecondActivity:{screen:SecondActivity},
     MainActivity:{screen:MainActivity},
 },{
-    initialRouteName:'App',
+    initialRouteName:'SecondActivity',
     headerMode:'none',
 });
 

@@ -3,7 +3,7 @@ import React from "react";
 import {Image, TextInput, View, StyleSheet, Text, TouchableHighlight} from "react-native";
 import MainActivity from './MainActivity';
 import FirstActivity from './FirstActivity';
-
+import NavigationBar from "../NavigationBar";
 export default class PhoneLoginActivity extends Component{
 
     state={
@@ -12,6 +12,12 @@ export default class PhoneLoginActivity extends Component{
 
     };
 
+    getCode = ()=>{
+        if(this.state.showCoundDown){
+            return;
+        }
+        setInterval(()=>{this.countDown()},1000);
+    };
 
     constructor(props){
         super(props);
@@ -36,17 +42,13 @@ export default class PhoneLoginActivity extends Component{
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
+                <NavigationBar/>
                 <Image style={styles.logo} source={require('../res/images/edition_ip.png')}/>
                 <View style={styles.inputTextContain}>
                     <Image style={styles.userIcon} source={require('../res/images/user.png')}/>
                     <TextInput style={styles.inputTextType} keyboardType='number-pad' underlineColorAndroid={'transparent'} placeholder={"请输入手机号"}/>
                     <View style={styles.verticalLine}/>
-                    <Text style={styles.getCode} onPress={()=>{
-                        if(this.state.showCoundDown){
-                            return;
-                        }
-                        setInterval(()=>{this.countDown()},1000);
-                    }}>{this.state.showCoundDown?this.state.requestCodeTime:"获取验证码"}</Text>
+                    <Text style={styles.getCode} onPress={this.getCode}>{this.state.showCoundDown?this.state.requestCodeTime:"获取验证码"}</Text>
                 </View>
                 <View style={styles.inputTextContain}>
                     <Image style={styles.userIcon} source={require('../res/images/lock.png')}/>
