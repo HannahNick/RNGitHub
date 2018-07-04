@@ -12,7 +12,7 @@ export default class FirstActivity extends Component{
             word:'123',
         }
     }
-
+    //123
     render(){
         const {navigate} = this.props.navigation;
         return (<View style={styles.contain}>
