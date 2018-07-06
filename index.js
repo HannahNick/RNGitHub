@@ -5,6 +5,7 @@ import {StackNavigator} from "react-navigation";
 import SecondActivity from "./activity/SecondActivity";
 import MainActivity from "./activity/MainActivity";
 import PhoneLoginActivity from "./activity/PhoneLoginActivity";
+import ListViewActivity from './activity/ListViewActivity';
 
 
 const Nick = StackNavigator({
@@ -13,6 +14,7 @@ const Nick = StackNavigator({
     FirstActivity:{screen:FirstActivity},
     SecondActivity:{screen:SecondActivity},
     MainActivity:{screen:MainActivity},
+    ListViewActivity:{screen:ListViewActivity}
 },{
     initialRouteName:'SecondActivity',
     headerMode:'none',

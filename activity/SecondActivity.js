@@ -1,8 +1,11 @@
 import {Component} from 'react'
 import React from "react";
-import {Text, View,StyleSheet} from "react-native";
+import {Text, View,StyleSheet,TouchableHighlight,Image,TouchableOpacity} from "react-native";
 import NavigationBar from "../NavigationBar";
 
+/**
+ * 第二测试页面
+ */
 export default class SecondActivity extends Component {
 
     constructor(props) {
@@ -18,21 +21,41 @@ export default class SecondActivity extends Component {
                         {/*this.props.navigation.goBack();*/}
                   {/*}}*/}
             {/*>返回上级页面</Text>*/}
-            <Text style={styles.textType1}>这里是Text1</Text>
+            <Text style={styles.textType1}>这里是Text1</Text> 
             <Text style={styles.textType2}>这里是Text2</Text>
             <Text style={styles.textType3}>这里是Text3</Text>
-            {/*<NavigationBar title='第二个页面'/>*/}
+            
+            {/* <NavigationBar 
+            title='SecondActivity' 
+            style={{
+                backgroundColor:'#EE6363',
+            }} 
+            rightButton={
+                <TouchableOpacity onPress={()=>{
+                    this.props.navigation.pop();
+                }}> 
+                    <Image 
+                    style={{width:20,height:20,resizeMode:'contain'}}
+                    source={require('../res/images/share.png')} />
+                </TouchableOpacity>
+            } 
+            leftButton={ 
+                <TouchableHighlight>
+                    <Image source={require('../res/images/arrow_back.png')}
+                        style={{width:20,height:20,resizeMode:'contain'}}
+                    />
+                </TouchableHighlight>
+            }
+            /> */}
         </View>)
     }
 
 }
-
+ 
 const styles = StyleSheet.create({
-    contain: {
-        flexDirection:'row',
+    contain: { 
+        flexDirection: 'row', 
         justifyContent: 'flex-start',
-        borderWidth:1,
-        borderColor:'gray',
     },
     fontType: {
         fontSize: 20,
@@ -41,14 +64,13 @@ const styles = StyleSheet.create({
     textType1:{
         //他的相对布局不是相对于父容器，而是相对于兄弟节点。
         backgroundColor:'steelblue',
-
+        flex:1,
     },
     textType2:{
-        flex:1,
+        width:200,
         backgroundColor:'skyblue',
     },
     textType3:{
-        width:100,
         backgroundColor:'powderblue',
     },
 

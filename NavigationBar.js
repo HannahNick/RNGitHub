@@ -59,7 +59,9 @@ export default class NavigationBar extends Component {
             {this.props.rightButton}
         </View>;
 
-        return (<View style={styles.container}>
+        return (
+            //这里表示的意思是允许使用用户外部传来的样式
+        <View style={[styles.container,this.props.style]}>
             {status}
             {content}
         </View>);
@@ -69,14 +71,15 @@ export default class NavigationBar extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'gray',
+        backgroundColor: 'red',
     },
     navBar: {
         justifyContent: 'space-between',
         alignItems: 'center',
         height: Platform.OS === 'iso' ? NAV_BAR_HEIGHT_ANDROID : NAV_BAR_HEIGHT_IOS,
-        backgroundColor:'red',
         flexDirection:'row',
+        paddingLeft: 10,
+        paddingRight: 10,
     },
     //绝对位置显示titleBar的位置居中
     titleViewContainer:{
