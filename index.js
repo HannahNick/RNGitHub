@@ -6,6 +6,9 @@ import SecondActivity from "./activity/SecondActivity";
 import MainActivity from "./activity/MainActivity";
 import PhoneLoginActivity from "./activity/PhoneLoginActivity";
 import ListViewActivity from './activity/ListViewActivity';
+import NickListActivity from './activity/NickListActivity';
+import NickListActivity2 from './activity/NickListActivity2';
+import FetchActivity from './activity/FetchActivity';
 
 
 const Nick = StackNavigator({
@@ -14,9 +17,12 @@ const Nick = StackNavigator({
     FirstActivity:{screen:FirstActivity},
     SecondActivity:{screen:SecondActivity},
     MainActivity:{screen:MainActivity},
-    ListViewActivity:{screen:ListViewActivity}
+    ListViewActivity:{screen:ListViewActivity},
+    NickListActivity:{screen:NickListActivity},
+    NickListActivity2:{screen:NickListActivity2},
+    FetchActivity:{screen:FetchActivity}
 },{
-    initialRouteName:'SecondActivity',
+    initialRouteName:'FetchActivity',
     headerMode:'none',
 });
 
