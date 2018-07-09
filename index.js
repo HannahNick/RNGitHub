@@ -9,6 +9,7 @@ import ListViewActivity from './activity/ListViewActivity';
 import NickListActivity from './activity/NickListActivity';
 import NickListActivity2 from './activity/NickListActivity2';
 import FetchActivity from './activity/FetchActivity';
+import PopularFragment from './activity/fragment/PopularFragment';
 
 
 const Nick = StackNavigator({
@@ -20,9 +21,10 @@ const Nick = StackNavigator({
     ListViewActivity:{screen:ListViewActivity},
     NickListActivity:{screen:NickListActivity},
     NickListActivity2:{screen:NickListActivity2},
-    FetchActivity:{screen:FetchActivity}
+    FetchActivity:{screen:FetchActivity},
+    PopularFragment:{screen:PopularFragment},
 },{
-    initialRouteName:'FetchActivity',
+    initialRouteName:'PopularFragment',
     headerMode:'none',
 });
 

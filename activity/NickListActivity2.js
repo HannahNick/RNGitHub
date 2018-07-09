@@ -129,9 +129,8 @@ export default class NickListActivity2 extends Component{
                     refreshControl={<RefreshControl 
                         //告诉RefreshControl什么时候刷新
                         refreshing={this.state.isLoading} 
-                        onRefresh={()=>{//下拉刷新的时候调用的方法
-                        this.onLoad() 
-                    }}/>}
+                        //下拉刷新调用方法
+                        onRefresh={this.onLoad()}/>}
                 />
                 {/*当这个Toast组件初始化完成的时候，把Toast引用赋值到this.toast*/}
                 <Toast ref={toast=>this.toast=toast}/>

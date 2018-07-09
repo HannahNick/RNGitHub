@@ -42,7 +42,6 @@ export default class PhoneLoginActivity extends Component{
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
-                <NavigationBar/>
                 <Image style={styles.logo} source={require('../res/images/edition_ip.png')}/>
                 <View style={styles.inputTextContain}>
                     <Image style={styles.userIcon} source={require('../res/images/user.png')}/>

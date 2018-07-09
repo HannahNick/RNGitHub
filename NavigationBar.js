@@ -28,10 +28,9 @@ export default class NavigationBar extends Component {
         statusBar:PropTypes.shape(StatusBarShape),//状态栏形状约束
     };
 
-    //默认值
+    //默认值 
     static defaultProps={
         statusBar:{
-            barStyle:'default',
             hidden:false,
         }
     };

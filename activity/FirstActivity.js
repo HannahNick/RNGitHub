@@ -1,8 +1,9 @@
 import {Component} from 'react'
 import React from "react";
-import {StyleSheet,Text, View,AppRegistry} from "react-native";
+import {StyleSheet,Text, View,AppRegistry,Alert} from "react-native";
 import {StackNavigator} from 'react-navigation';
 import SecondActivity from "./SecondActivity";
+import axios from 'axios';
 
 export default class FirstActivity extends Component{
 
@@ -11,6 +12,48 @@ export default class FirstActivity extends Component{
         this.state={
             word:'123',
         }
+    }
+
+    getData(){ 
+        axios.post ('http://heyguys.ap88.com/GOODSCORE-SERVICE/category/categroysByType.apec', {
+            categoryType: '2',
+        },{
+            headers:{
+                'content-type': 'application/x-www-form-urlencoded'
+            }
+        }
+      )
+      .then(res => this.setState({
+          word:JSON.stringify(res.data),
+      }))
+      .catch(err => Alert.alert(err))
+    }
+
+    getDataForFetch(){
+        fetch('http://heyguys.ap88.com/CMS-COMPONENTSETTING-SERVICE/cmsComponentValue/getSettingByFileId.apec2', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'content-type': 'application/x-www-form-urlencoded'
+      }, 
+      body: JSON.stringify({
+        tempFileId:1,
+        viewType:2
+      })
+    }) 
+      .then((response) => {
+        // Alert.alert(JSON.stringify(response))
+        return response.json()
+      })
+      .then((responseJson) => {
+        console.log('data===> ' + responseJson)
+        Alert.alert(JSON.stringify(responseJson))
+
+        return responseJson;
+      })
+      .catch((error) => {
+        console.error('error====>'+error);
+      })
     }
     //123
     render(){
@@ -36,10 +79,12 @@ export default class FirstActivity extends Component{
                 {/*navigate('PhoneLoginActivity')*/}
             {/*}}>推荐跳转方式2</Text>*/}
             <View style={styles.text1TypeContain}>
-                <Text style={styles.text1Type}>这里是Text1</Text>
+                <Text style={styles.text1Type } onPress={()=>{
+                    this.getDataForFetch();
+                }}>这里是Text1</Text>
             </View>
             <Text style={styles.text2Type}>这里是Text2</Text>
-            <Text style={styles.text3Type}>这里是Text3</Text>
+            <Text style={styles.text3Type}>{this.state.word}</Text>
             {/*<Text style={styles.text}>{this.props.navigation.state.params.word}</Text>*/}
 
         </View>)

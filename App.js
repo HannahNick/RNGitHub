@@ -7,7 +7,7 @@
 import React, {Component} from 'react';
 import TabNavigator from 'react-native-tab-navigator';
 import {Navigator} from 'react-native-deprecated-custom-components';
-import {StackNavigator} from 'react-navigation';
+import {StackNavigator,StackActions,NavigationActions} from 'react-navigation';
 import {
     AppRegistry,
     Image,
@@ -31,11 +31,25 @@ export default class App extends Component<props> {
 
     }
 
+    toPhoneLogin(){
+        //这种方式是跳到下一个页面，并且干掉当前页面
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'PhoneLoginActivity' })],
+          });
+        this.props.navigation.dispatch(resetAction);
+    }
+
     componentDidMount() {
-        const {navigate} = this.props.navigation;
-        setTimeout(()=>{
-           navigate("PhoneLoginActivity");
+        this.timer=setTimeout(()=>{
+            this.toPhoneLogin();
+        //    this.props.navigation.navigate("PhoneLoginActivity");
         },2000);
+    }
+
+    componentWillUnmount(){
+        //当前页面被干掉时清除计时器，防止内存泄漏
+        this.timer&&clearTimeout(this.timer);
     }
 
     render() {
