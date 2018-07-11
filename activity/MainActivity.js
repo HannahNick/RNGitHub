@@ -2,6 +2,8 @@ import {Component} from 'react'
 import TabNavigator from "react-native-tab-navigator";
 import {Image, StyleSheet, Text, View} from "react-native";
 import React from "react";
+import PopularFragment from './fragment/PopularFragment';
+import MeFragment from './fragment/MeFragment';
 
 export default class MainActivity extends Component{
 
@@ -22,7 +24,7 @@ export default class MainActivity extends Component{
                         renderSelectedIcon={() => <Image style={styles.fragmentIcon} source={require('../res/images/home_sel.png')}/>}
                         onPress={() => this.setState({selectedTab: 'home'})}>
                         <View style={styles.fragmentContain}>
-                            <Text>首页</Text>
+                            <PopularFragment/>
                         </View>
                     </TabNavigator.Item>
                     <TabNavigator.Item
@@ -48,9 +50,7 @@ export default class MainActivity extends Component{
                         renderIcon={() => <Image style={styles.fragmentIcon} source={require('../res/images/my_def.png')}/>}
                         renderSelectedIcon={() => <Image style={styles.fragmentIcon} source={require('../res/images/my_sel.png')}/>}
                         onPress={() => this.setState({selectedTab: 'me'})}>
-                        <View style={styles.fragmentContain}>
-                            <Text>我的</Text>
-                        </View>
+                        <MeFragment {...this.props}/>
                     </TabNavigator.Item>
                 </TabNavigator>
             </View>
@@ -71,9 +71,6 @@ const styles = StyleSheet.create({
     },
     fragmentContain: {
         flex:1,
-        justifyContent:'center',
-        flexWrap:'wrap',
-        alignItems:'center',
     },
     fragmentIcon:{
         width:40,

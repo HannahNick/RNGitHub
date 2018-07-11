@@ -10,6 +10,9 @@ import NickListActivity from './activity/NickListActivity';
 import NickListActivity2 from './activity/NickListActivity2';
 import FetchActivity from './activity/FetchActivity';
 import PopularFragment from './activity/fragment/PopularFragment';
+import PopularFragment2 from './activity/fragment/PopularFragment2';
+import MeFragment from './activity/fragment/MeFragment';
+import CustomKeyActivity from './activity/CustomKeyActivity';
 
 
 const Nick = StackNavigator({
@@ -23,8 +26,11 @@ const Nick = StackNavigator({
     NickListActivity2:{screen:NickListActivity2},
     FetchActivity:{screen:FetchActivity},
     PopularFragment:{screen:PopularFragment},
+    PopularFragment2:{screen:PopularFragment2},
+    MeFragment:{screen:MeFragment},
+    CustomKeyActivity:{screen:CustomKeyActivity},
 },{
-    initialRouteName:'PopularFragment',
+    initialRouteName:'CustomKeyActivity', 
     headerMode:'none',
 });
 

@@ -1,10 +1,12 @@
 import {Component} from 'react'
 import React from "react";
-import {StyleSheet,Text, View,AppRegistry,Alert} from "react-native";
+import {StyleSheet,Text, View,AppRegistry,Alert,AsyncStorage} from "react-native";
 import {StackNavigator} from 'react-navigation';
 import SecondActivity from "./SecondActivity";
+import Toast,{DURATION} from 'react-native-easy-toast';
 import axios from 'axios';
 
+const KEY = "nick";
 export default class FirstActivity extends Component{
 
     constructor(props){
@@ -80,20 +82,29 @@ export default class FirstActivity extends Component{
             {/*}}>推荐跳转方式2</Text>*/}
             <View style={styles.text1TypeContain}>
                 <Text style={styles.text1Type } onPress={()=>{
-                    this.getDataForFetch();
-                }}>这里是Text1</Text>
+                    AsyncStorage.setItem(KEY,"123",error=>{
+                        error?this.toast.show("保存失败"):this.toast.show("保存成功");
+                    })
+                }}>保存参数</Text>
             </View>
-            <Text style={styles.text2Type}>这里是Text2</Text>
-            <Text style={styles.text3Type}>{this.state.word}</Text>
+            <Text style={styles.text2Type} onPress={()=>{
+                    AsyncStorage.getItem(KEY,(error,content)=>{
+                        error?this.toast.show("没有相应值"):this.toast.show("获取值>>>"+content);
+                    }) }}>获取参数</Text>
+            <Text style={styles.text3Type} onPress={()=>{
+                    AsyncStorage.removeItem(KEY,(error,content)=>{
+                        error?this.toast.show("移除失败"):this.toast.show("移除成功>>>"+content);
+                    }) }}>移除参数</Text>
+            <Toast ref={toast=>this.toast=toast}/>
             {/*<Text style={styles.text}>{this.props.navigation.state.params.word}</Text>*/}
-
-        </View>)
+ 
+        </View>) 
     }
 }
 
 const styles = StyleSheet.create({
     contain:{
-        height:500,
+        flex:1,
         alignSelf:'stretch',
         justifyContent:'flex-start',
         flexWrap:'nowrap',//wrap:自适应  nowrap:不自适应(默认)
