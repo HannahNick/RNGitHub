@@ -1,7 +1,7 @@
 
 import keys from '../../../res/data/keys.json';
-import {AsyncStorage} from 'react-native';
-var FLAG_LANGUAGE={flag_language:'flag_language',flag_key:'flag_key'}
+import {AsyncStorage,Alert} from 'react-native';
+export var FLAG_LANGUAGE={flag_language:'flag_language',flag_key:'flag_key'};
 export default class LanguageDao{
     constructor(flag){//标示哪个模块在调用
         this.flag=flag;
@@ -13,8 +13,14 @@ export default class LanguageDao{
      */
     save(data){
         AsyncStorage.setItem(this.flag,JSON.stringify(data),(error)=>{
-
         })
+    }
+
+
+
+    delete(){
+        AsyncStorage.removeItem(this.flag,(error)=>{
+        });
     }
 
     /**
@@ -26,16 +32,16 @@ export default class LanguageDao{
                 if(error){//如果获取失败了就回调
                     reject(error);
                 }else{
-                    if(result){//判断result是否为空？?还能这么写？  数据库有数据就返回
+                    if(result){//判断result是否为空？?还能这么写？  result不为空
                         try{//JSON解析有可能抛异常
-                            resolve(JSON.parse(result));
+                            resolve(JSON.parse(result));//因为保存的是字符串，所以获取的时候需要做一步转换
                         }catch(e){
-                            reject(e)
+                            reject(e);
                         }
                     }else{//如果数据库为空就返回默认的数据
-                        var data = this.flag===FLAG_LANGUAGE.flag_key?keys:null;
+                        let data = this.flag===FLAG_LANGUAGE.flag_key?keys:null;
                         this.save(data);
-                        resolve(data)
+                        resolve(data);
                     }
                 }
             })

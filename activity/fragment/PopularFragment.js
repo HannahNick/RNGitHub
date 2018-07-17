@@ -3,6 +3,7 @@ import {StyleSheet,View,Image,Text,TextInput,Alert,TouchableOpacity,ListView,Ref
 import NavigationBar from '../../NavigationBar';
 import DataRepository from '../expand/dao/DataRepository';
 import ScrollableTabView,{ScrollableTabBar} from 'react-native-scrollable-tab-view';
+import LanguageDao,{FLAG_LANGUAGE} from "../expand/dao/LanguageDao";
 
 const URL="https://api.github.com/search/repositories?q=";
 const POPULAR_TYPE="&sort=start";
@@ -12,11 +13,14 @@ export default class PopularFragment extends Component{
     constructor(props){
         super(props);
         this.dataRepository = new DataRepository();
+        this.languageDao=new LanguageDao(FLAG_LANGUAGE.flag_key);
         this.state={
             popularData:'',
             isLoading:false,
+            language:[],
         }
     }
+
 
     getData(key){
         let url = URL+key+POPULAR_TYPE;
@@ -33,31 +37,61 @@ export default class PopularFragment extends Component{
         })
     }
 
+    componentDidMount() {
+        this.loadData();
+    }
+
+    /**
+     * 获取数据库里的数据
+     */
+    loadData(){
+        this.languageDao.fetch()
+            .then(result=>{
+                this.setState({
+                    language:result,
+                })
+            })
+            .catch(error=>{
+                console.log(error);
+            });
+    }
+
+    /**
+     * 渲染tab
+     */
+    renderTab(){
+        /*其中内部子组件需要添加tabLabel属性，这个属性是为ScrollableTabView添加名字*/
+        return this.state.language.map((keys,index)=>{
+            if (keys.checked){
+                return <PopularTab key={index} tabLabel={keys.name}/>;
+            }else {
+                return null;
+            }
+        });
+    }
+
+
+
     render(){
+        //这个和android的TabLayou很像
+        let content = this.state.language.length>0?<ScrollableTabView
+            tabBarBackgroundColor='#2196F3'
+            //未选中状态的tab文字颜色
+            tabBarInactiveTextColor="mintcream"
+            //选中状态的tab文字颜色
+            tabBarActiveTextColor="white"
+            tabBarUnderlineStyle={{backgroundColor:'#e7e7e7',height:2}}
+            //这里要注意导包，和ScrollableTabView一起使用的
+            renderTabBar={()=><ScrollableTabBar/>}
+        >
+            {this.renderTab()}
+        </ScrollableTabView>:null;
         return(
             <View 
                 //这里要注意需要给父容器添加flex:1属性，否则看不到内容，无法自适应内容
                 style={styles.container}>
                 <NavigationBar title="最热" statusBar={{backgroundColor:'#2196F3'}}/>
-                {/*这个和android的TabLayou很像*/}
-                <ScrollableTabView 
-                    tabBarBackgroundColor='#2196F3'
-                    //未选中状态的tab文字颜色
-                    tabBarInactiveTextColor="mintcream"
-                    //选中状态的tab文字颜色
-                    tabBarActiveTextColor="white"
-                    tabBarUnderlineStyle={{backgroundColor:'#e7e7e7',height:2}}
-                    //这里要注意导包，和ScrollableTabView一起使用的
-                    renderTabBar={()=><ScrollableTabBar/>}
-                >
-                    {/*其中内部子组件需要添加tabLabel属性，这个属性是为ScrollableTabView添加名字*/}
-                    <PopularTab tabLabel="Java"/>
-                    <PopularTab tabLabel="IOS"/>
-                    <PopularTab tabLabel="Android"/>
-                    <PopularTab tabLabel="JavaScript"/>
-                    <PopularTab tabLabel="Java"/>
-                </ScrollableTabView>
-                
+                {content}
             </View>
         )
     }
@@ -126,11 +160,13 @@ class PopularTab extends Component{
     }
 
     renderDecoration=(arg1,arg2,arg3)=>{
+
         return <View style={{backgroundColor:'gray',height:1}}/>
-    }
+    };
 
     render(){
-        return <ListView dataSource={this.state.dataSource}
+        return <ListView
+            dataSource={this.state.dataSource}
             renderRow={data=>this.renderItem(data)}
             refreshControl={
                 <RefreshControl refreshing={this.state.isLoading}

@@ -30,7 +30,7 @@ const Nick = StackNavigator({
     MeFragment:{screen:MeFragment},
     CustomKeyActivity:{screen:CustomKeyActivity},
 },{
-    initialRouteName:'CustomKeyActivity', 
+    initialRouteName:'MainActivity', 
     headerMode:'none',
 });
 

@@ -5,9 +5,9 @@ export default class ArrayUtil{
      * @param {*} array 
      * @param {*} item 
      */
-    static updataArray(array,item){
-        for(var i=0,len=array.length;i<len;i++){
-            var temp = array[i];
+    static updateArray(array, item){
+        for(let i=0,len=array.length;i<len;i++){
+            let temp = array[i];
             if(temp===item){
                 array.splice(i,1);
                 return;
