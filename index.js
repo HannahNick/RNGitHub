@@ -13,6 +13,8 @@ import PopularFragment from './activity/fragment/PopularFragment';
 import PopularFragment2 from './activity/fragment/PopularFragment2';
 import MeFragment from './activity/fragment/MeFragment';
 import CustomKeyActivity from './activity/CustomKeyActivity';
+import SortKeyActivity from "./activity/SortKeyActivity";
+import RemoveKeyActivity from "./activity/RemoveKeyActivity";
 
 
 const Nick = StackNavigator({
@@ -29,6 +31,8 @@ const Nick = StackNavigator({
     PopularFragment2:{screen:PopularFragment2},
     MeFragment:{screen:MeFragment},
     CustomKeyActivity:{screen:CustomKeyActivity},
+    SortKeyActivity:{screen:SortKeyActivity},
+    RemoveKeyActivity:{screen:RemoveKeyActivity},
 },{
     initialRouteName:'MainActivity', 
     headerMode:'none',

@@ -2,7 +2,6 @@
     {
         "path":"stars:>1",
         "name":"ALL",
-        "short_name":"ALL",
         "checked":true
     },
     {

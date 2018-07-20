@@ -8,23 +8,24 @@ export default class LanguageDao{
     }
 
     /**
-     * 
-     * @param {把数据保存到数据库} data 
+     * 把数据转换成json字符串保存到数据库
+     * @param data
      */
     save(data){
         AsyncStorage.setItem(this.flag,JSON.stringify(data),(error)=>{
         })
     }
 
-
-
+    /**
+     * 删除对象
+     */
     delete(){
         AsyncStorage.removeItem(this.flag,(error)=>{
         });
     }
 
     /**
-     * 从数据库中获取数据
+     * 从数据库中获取数据,获取的是字符串,再经过转换成对象返回到调用者那边使用
      */
     fetch(){
         return new Promise((resolve,reject)=>{

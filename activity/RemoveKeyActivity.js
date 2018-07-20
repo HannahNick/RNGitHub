@@ -1,18 +1,24 @@
+/**
+ * Created by nick on 2018/7/20
+ */
+
 import React,{Component} from 'react';
-import {StyleSheet,View,Text,TouchableOpacity,ScrollView,Image,Alert} from 'react-native';
-import NavigationBar from '../NavigationBar';
-import ViewUtil from '../js/utils/ViewUtil';
-import LanguageDao,{FLAG_LANGUAGE} from './expand/dao/LanguageDao';
-import CheckBox from 'react-native-check-box';
+import ViewUtil from "../js/utils/ViewUtil";
+import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import NavigationBar from "../NavigationBar";
+import LanguageDao, {FLAG_LANGUAGE} from "./expand/dao/LanguageDao";
+import CheckBox from "react-native-check-box";
 import ArrayUtil from "../js/utils/ArrayUtil";
-export default class CustomKeyActivity extends Component{
+
+export default class RemoveKeyActivity extends Component{
 
     constructor(props){
         super(props);
         this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key);
-        this.changeValues=[];//用于保存用户操作的数据
+        this.selectArray=[];
         this.state={
-            dataArray:[]
+            dataArray:[],
+
         }
     }
 
@@ -22,34 +28,15 @@ export default class CustomKeyActivity extends Component{
 
     loadData(){
         this.languageDao.fetch()
-        .then(result=>{
-            this.setState({
-                dataArray:result,
-            });
-        })
-        .catch(error=>{
-            console.log(error);
-        })
+            .then(result=>{
+                this.setState({
+                    dataArray:result,
+                });
+            })
+            .catch(error=>{
+                console.log(error);
+            })
     }
-    onSave(){
-        if (this.changeValues.length===0){
-            this.props.navigation.goBack();
-            return;
-        }
-        this.languageDao.save(this.state.dataArray);
-        this.props.navigation.goBack();
-    }
-
-    goBack(){
-        if (this.changeValues.length===0){
-            this.props.navigation.goBack();
-        }else {
-            Alert.alert("提示",
-                "是否保存修改",
-                [{text:"不保存",onPress:()=>{this.props.navigation.goBack()}, style:'cancel'},{text:"保存",onPress:()=>{this.onSave()}}])
-        }
-    }
-
 
     renderView(){
         if(!this.state.dataArray||this.state.dataArray.length===0){
@@ -75,7 +62,7 @@ export default class CustomKeyActivity extends Component{
                     {this.renderCheckBox(this.state.dataArray[len-1])}
                 </View>
                 <View style={styles.line}/>
-            </View> 
+            </View>
         );
         return views;
     }
@@ -88,7 +75,7 @@ export default class CustomKeyActivity extends Component{
                 style={styles.check}
                 onClick={()=>this.onClick(data)}
                 leftText={leftText}
-                isChecked={!data.checked}
+                isChecked={true}
                 checkedImage={<Image  style={styles.checkIcon } source={require('../res/images/check.png')}/>}
                 unCheckedImage={<Image style={styles.checkIcon} source={require('../res/images/uncheck.png')}/>}
             />
@@ -96,33 +83,49 @@ export default class CustomKeyActivity extends Component{
     }
 
     onClick(data){
-        data.checked=!data.checked;
         //如果勾选的对象在定义的数组中的话，就移除，否则就添加进去
-        ArrayUtil.updateArray(this.changeValues,data);
+        ArrayUtil.updateArray(this.selectArray,data);
+    }
+
+    goBack(){
+        this.props.navigation.goBack();
+    }
+
+    onSave(){
+        if (this.selectArray.length===0){
+            this.props.navigation.goBack();
+            return
+        }
+        for(let i=0;i<this.state.dataArray.length;i++){
+            let data=this.state.dataArray[i];
+            for(let j=0;j<this.selectArray.length;j++){
+                if (data===this.selectArray[j]){
+                    this.state.dataArray.splice(i,1);
+                }
+            }
+        }
+        this.languageDao.save(this.state.dataArray);
+        this.props.navigation.goBack();
     }
 
     render(){
         let rightButton=<TouchableOpacity onPress={()=>this.onSave()}>
             <View style={{marginRight:10}}>
-                <Text style={styles.title}>保存</Text>
+                <Text style={styles.title}>移除</Text>
             </View>
         </TouchableOpacity>;
         return (
             <View style={{flex:1}}>
-                <NavigationBar 
-                    title='自定义标签' 
+                <NavigationBar
+                    title='删除数据'
                     leftButton={ViewUtil.getLeftButton(()=>this.goBack())}
                     rightButton={rightButton}
-                    />
+                />
                 {this.renderView()}
-                <Text style={{height:30,alignSelf:'center'}} onPress={()=>{
-                    this.languageDao.delete();
-                }}>删除数据</Text>
             </View>
-        ) 
+        )
     }
 }
-
 const styles = StyleSheet.create({
     title:{
         fontSize: 15,
