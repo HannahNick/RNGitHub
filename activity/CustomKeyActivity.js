@@ -9,6 +9,7 @@ export default class CustomKeyActivity extends Component{
 
     constructor(props){
         super(props);
+        this.isRemove = this.props.navigation.state.params.isRemove;
         this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key);
         this.changeValues=[];//用于保存用户操作的数据
         this.state={
@@ -36,6 +37,12 @@ export default class CustomKeyActivity extends Component{
             this.props.navigation.goBack();
             return;
         }
+        if (this.isRemove) {
+            for (let i = 0; i < this.changeValues.length; i++) {
+                const changeData = this.changeValues[i];
+                ArrayUtil.removeItem(this.state.dataArray,changeData);
+            }
+        }
         this.languageDao.save(this.state.dataArray);
         this.props.navigation.goBack();
     }
@@ -46,7 +53,8 @@ export default class CustomKeyActivity extends Component{
         }else {
             Alert.alert("提示",
                 "是否保存修改",
-                [{text:"不保存",onPress:()=>{this.props.navigation.goBack()}, style:'cancel'},{text:"保存",onPress:()=>{this.onSave()}}])
+                [{text:"不保存",onPress:()=>{this.props.navigation.goBack()}, style:'cancel'},
+                    {text:"保存",onPress:()=>{this.onSave()}}])
         }
     }
 
@@ -82,15 +90,16 @@ export default class CustomKeyActivity extends Component{
 
     renderCheckBox(data){
         let leftText=data.name;
+        let isCheck = this.isRemove?false:data.checked;
         return(
             <CheckBox
                 isIndeterminate={false}
                 style={styles.check}
                 onClick={()=>this.onClick(data)}
                 leftText={leftText}
-                isChecked={!data.checked}
-                checkedImage={<Image  style={styles.checkIcon } source={require('../res/images/check.png')}/>}
-                unCheckedImage={<Image style={styles.checkIcon} source={require('../res/images/uncheck.png')}/>}
+                isChecked={isCheck}
+                checkedImage={<Image  style={styles.checkIcon } source={require('../res/images/uncheck.png')}/>}
+                unCheckedImage={<Image style={styles.checkIcon} source={require('../res/images/check.png')}/>}
             />
         )
     }
@@ -102,15 +111,17 @@ export default class CustomKeyActivity extends Component{
     }
 
     render(){
+        let rightButtonName=this.isRemove?"移除":"保存";
+        let titleName = this.isRemove?"删除标签":"标签订阅";
         let rightButton=<TouchableOpacity onPress={()=>this.onSave()}>
             <View style={{marginRight:10}}>
-                <Text style={styles.title}>保存</Text>
+                <Text style={styles.title}>{rightButtonName}</Text>
             </View>
         </TouchableOpacity>;
         return (
             <View style={{flex:1}}>
                 <NavigationBar 
-                    title='自定义标签' 
+                    title={titleName}
                     leftButton={ViewUtil.getLeftButton(()=>this.goBack())}
                     rightButton={rightButton}
                     />

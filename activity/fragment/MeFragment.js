@@ -12,9 +12,9 @@ export default class MeFragment extends Component{
         return(
             <View>
                 <NavigationBar title='我的'/>
-                <Text style={styles.mine} onPress={()=>this.props.navigation.navigate("CustomKeyActivity")}>标签订阅</Text>
+                <Text style={styles.mine} onPress={()=>this.props.navigation.navigate("CustomKeyActivity",{isRemove:false})}>标签订阅</Text>
                 <Text style={styles.sortKey} onPress={()=>this.props.navigation.navigate("SortKeyActivity")}>标签排序</Text>
-                <Text style={styles.removeKey} onPress={()=>this.props.navigation.navigate("RemoveKeyActivity")}>删除标签</Text>
+                <Text style={styles.removeKey} onPress={()=>this.props.navigation.navigate("CustomKeyActivity",{isRemove:true})}>删除标签</Text>
             </View>
         )
     }

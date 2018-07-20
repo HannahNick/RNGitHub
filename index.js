@@ -1,7 +1,7 @@
 import { AppRegistry ,YellowBox} from 'react-native';
 import App from './App';
 import FirstActivity from "./activity/FirstActivity";
-import {StackNavigator} from "react-navigation";
+import {createStackNavigator} from "react-navigation";
 import SecondActivity from "./activity/SecondActivity";
 import MainActivity from "./activity/MainActivity";
 import PhoneLoginActivity from "./activity/PhoneLoginActivity";
@@ -14,10 +14,9 @@ import PopularFragment2 from './activity/fragment/PopularFragment2';
 import MeFragment from './activity/fragment/MeFragment';
 import CustomKeyActivity from './activity/CustomKeyActivity';
 import SortKeyActivity from "./activity/SortKeyActivity";
-import RemoveKeyActivity from "./activity/RemoveKeyActivity";
 
 
-const Nick = StackNavigator({
+const Nick = createStackNavigator({
     App:{screen:App},
     PhoneLoginActivity:{screen:PhoneLoginActivity},
     FirstActivity:{screen:FirstActivity},

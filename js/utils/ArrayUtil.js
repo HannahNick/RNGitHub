@@ -34,8 +34,8 @@ export default class ArrayUtil{
 
     /**
      * 判断两个数组的元素是否一一对应
-     * @param arr1
-     * @param arr2
+     * @param arr1 数组一
+     * @param arr2 数组二
      * @returns {boolean} true相等且元素相等
      */
     static isEqual(arr1,arr2){
@@ -51,5 +51,20 @@ export default class ArrayUtil{
             }
         }
         return true;
+    }
+
+    /**
+     * 移除数组中对应的item
+     * @param arr
+     * @param item
+     */
+    static removeItem(arr,item){
+        const size = arr.length;
+        for (let i = 0; i < size; i++) {
+            let data=arr[i];
+            if (data === item) {
+                arr.splice(i,1);
+            }
+        }
     }
 }
