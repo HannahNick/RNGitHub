@@ -31,7 +31,6 @@ const Nick = createStackNavigator({
     MeFragment:{screen:MeFragment},
     CustomKeyActivity:{screen:CustomKeyActivity},
     SortKeyActivity:{screen:SortKeyActivity},
-    RemoveKeyActivity:{screen:RemoveKeyActivity},
 },{
     initialRouteName:'MainActivity', 
     headerMode:'none',

@@ -1,5 +1,13 @@
 import React,{Component} from 'react';
-import {StyleSheet,View,Image,Text,TextInput,Alert,TouchableOpacity,ListView,RefreshControl} from 'react-native';
+import {StyleSheet,
+    View,
+    Image,
+    Text,
+    TouchableOpacity,
+    ListView,
+    RefreshControl,
+    DeviceEventEmitter,
+    } from 'react-native';
 import NavigationBar from '../../NavigationBar';
 import DataRepository from '../expand/dao/DataRepository';
 import ScrollableTabView,{ScrollableTabBar} from 'react-native-scrollable-tab-view';
@@ -21,28 +29,12 @@ export default class PopularFragment extends Component{
         }
     }
 
-
-    getData(key){
-        let url = URL+key+POPULAR_TYPE;
-        this.dataRepository.getPopularData(url)
-        .then(result=>{
-            this.setState({
-                popularData:JSON.stringify(result),
-            })
-        })
-        .catch(error=>{
-            this.setState({
-                popularData:JSON.stringify(error),
-            })
-        })
-    }
-
     componentDidMount() {
         this.loadData();
     }
 
     /**
-     * 获取数据库里的数据
+     * 获取数据库里的订阅标签数据
      */
     loadData(){
         this.languageDao.fetch()
@@ -113,18 +105,44 @@ class PopularTab extends Component{
         this.getData();
     }
 
+    /**
+     * 获取数据
+     */
     getData(){
         this.setState({
             isLoading:true
         });
         let url = URL+this.props.tabLabel+POPULAR_TYPE;
-        this.dataRepository.getPopularData(url)
+        //先查看本地数据库是否有缓存数据
+        this.dataRepository.fetchRepository(url)
         .then(result=>{
+            let items = [];
+            if (result && result.items) {//判断result和result.items是否不为空
+                items = result.items
+            }else {
+                if (result) {
+                    items=result;
+                }
+            }
             this.setState({
                 //这里要注意cloneWithRows的返回值类型是ListViewDataSource
-                dataSource:this.state.dataSource.cloneWithRows(result.items),
+                dataSource:this.state.dataSource.cloneWithRows(items),
                 isLoading:false,
-            })
+            });
+            //如果数据是4个小时以前就去刷新
+            if (result && result.update_data&&this.dataRepository.checkData(result.update_data)) {
+                DeviceEventEmitter.emit('showToast','数据过时');
+                return this.dataRepository.fetchNetRepository(url);
+            }else {
+                DeviceEventEmitter.emit('showToast','显示缓存数据');
+            }
+        })
+        .then(items=>{
+            if (!items || items.length === 0) return;
+            this.setState({
+                dataSource:this.state.dataSource.cloneWithRows(items),
+            });
+            DeviceEventEmitter.emit('showToast','显示网络数据');
         })
         .catch(error=>{
             this.setState({

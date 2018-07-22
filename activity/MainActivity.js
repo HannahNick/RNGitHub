@@ -1,9 +1,10 @@
 import {Component} from 'react'
 import TabNavigator from "react-native-tab-navigator";
-import {Image, StyleSheet, Text, View} from "react-native";
+import {Image, StyleSheet, Text, View,DeviceEventEmitter} from "react-native";
 import React from "react";
 import PopularFragment from './fragment/PopularFragment';
 import MeFragment from './fragment/MeFragment';
+import Toast,{DURATION} from "react-native-easy-toast";
 
 export default class MainActivity extends Component{
 
@@ -12,6 +13,16 @@ export default class MainActivity extends Component{
         this.state = {
             selectedTab: 'home',
         }
+    }
+
+    componentDidMount() {
+        this.listener=DeviceEventEmitter.addListener("showToast",(text)=>{
+            this.toast.show(text,DURATION.LENGTH_SHORT);
+        });
+    }
+
+    componentWillUnmount() {
+        this.listener&&this.listener.remove();
     }
 
     render(){
@@ -53,6 +64,7 @@ export default class MainActivity extends Component{
                         <MeFragment {...this.props}/>
                     </TabNavigator.Item>
                 </TabNavigator>
+                <Toast ref={toast=>this.toast=toast}/>
             </View>
             );
     }
