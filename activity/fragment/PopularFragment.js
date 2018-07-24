@@ -12,6 +12,7 @@ import NavigationBar from '../../NavigationBar';
 import DataRepository from '../expand/dao/DataRepository';
 import ScrollableTabView,{ScrollableTabBar} from 'react-native-scrollable-tab-view';
 import LanguageDao,{FLAG_LANGUAGE} from "../expand/dao/LanguageDao";
+import RepositoryDetailActivity from "../RepositoryDetailActivity";
 
 const URL="https://api.github.com/search/repositories?q=";
 const POPULAR_TYPE="&sort=start";
@@ -20,7 +21,6 @@ export default class PopularFragment extends Component{
 
     constructor(props){
         super(props);
-        this.dataRepository = new DataRepository();
         this.languageDao=new LanguageDao(FLAG_LANGUAGE.flag_key);
         this.state={
             popularData:'',
@@ -55,7 +55,7 @@ export default class PopularFragment extends Component{
         /*其中内部子组件需要添加tabLabel属性，这个属性是为ScrollableTabView添加名字*/
         return this.state.language.map((keys,index)=>{
             if (keys.checked){
-                return <PopularTab key={index} tabLabel={keys.name}/>;
+                return <PopularTab key={index} tabLabel={keys.name} {...this.props}/>;
             }else {
                 return null;
             }
@@ -89,6 +89,9 @@ export default class PopularFragment extends Component{
     }
 }
 
+/**
+ * 每个Tab数据
+ */
 class PopularTab extends Component{
     constructor(props){
         super(props);
@@ -98,6 +101,7 @@ class PopularTab extends Component{
             popularData:'',
             //这里要注意dataSource的类型是ListViewDataSource
             dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2}),
+            isLoading:false,
         }
     }
 
@@ -118,7 +122,7 @@ class PopularTab extends Component{
         .then(result=>{
             let items = [];
             if (result && result.items) {//判断result和result.items是否不为空
-                items = result.items
+                items = result.items;
             }else {
                 if (result) {
                     items=result;
@@ -149,25 +153,35 @@ class PopularTab extends Component{
                 popularData:JSON.stringify(error),
             })
         })
-    } 
+    }
+
+    /**
+     * 跳转到详情页
+     * @param item
+     */
+    onSelect(item){
+        this.props.navigation.navigate("RepositoryDetailActivity",{item:item});
+    }
 
     renderItem(data){
         return (
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={()=>{this.onSelect(data)}}
+            >
                 <View style={styles.item_shadow}>
                     <Text style={styles.title}>{data.full_name}</Text>
                     <Text style={styles.description}>{data.description}</Text> 
-                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                    <View style={{height:20,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                         <View style={{flexDirection:'row'}}>
                             <Text style={styles.title}>Author:</Text>
                             <Image source={{uri:data.owner.avatar_url}}
-                                style={{height:22,width:22}}
+                                style={{height:20,width:20,marginLeft:5}}
                                 resizeMode='contain'
                             />
                         </View>
                         <Text style={styles.title}>Stars: {data.stargazers_count}</Text>
                         <Image 
-                            style={{width:22,height:22}}
+                            style={{width:20,height:20}}
                             source={require("../../res/images/collection_def.png")}
                             resizeMode='contain'
                         />
@@ -176,11 +190,6 @@ class PopularTab extends Component{
             </TouchableOpacity>
         )
     }
-
-    renderDecoration=(arg1,arg2,arg3)=>{
-
-        return <View style={{backgroundColor:'gray',height:1}}/>
-    };
 
     render(){
         return <ListView

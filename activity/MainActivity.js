@@ -5,6 +5,7 @@ import React from "react";
 import PopularFragment from './fragment/PopularFragment';
 import MeFragment from './fragment/MeFragment';
 import Toast,{DURATION} from "react-native-easy-toast";
+import RepositoryDetailActivity from "./RepositoryDetailActivity";
 
 export default class MainActivity extends Component{
 
@@ -16,6 +17,7 @@ export default class MainActivity extends Component{
     }
 
     componentDidMount() {
+        //这个东西有点类似广播接收者
         this.listener=DeviceEventEmitter.addListener("showToast",(text)=>{
             this.toast.show(text,DURATION.LENGTH_SHORT);
         });
@@ -35,7 +37,7 @@ export default class MainActivity extends Component{
                         renderSelectedIcon={() => <Image style={styles.fragmentIcon} source={require('../res/images/home_sel.png')}/>}
                         onPress={() => this.setState({selectedTab: 'home'})}>
                         <View style={styles.fragmentContain}>
-                            <PopularFragment/>
+                            <PopularFragment {...this.props}/>
                         </View>
                     </TabNavigator.Item>
                     <TabNavigator.Item
@@ -52,9 +54,7 @@ export default class MainActivity extends Component{
                         renderIcon={() => <Image style={styles.fragmentIcon} source={require('../res/images/Shopping_def.png')}/>}
                         renderSelectedIcon={() => <Image style={styles.fragmentIcon} source={require('../res/images/Shopping_sel.png')}/>}
                         onPress={() => this.setState({selectedTab: 'shopping'})}>
-                        <View style={styles.fragmentContain}>
-                            <Text>购物车</Text>
-                        </View>
+                        <RepositoryDetailActivity/>
                     </TabNavigator.Item>
                     <TabNavigator.Item
                         selected={this.state.selectedTab === 'me'}

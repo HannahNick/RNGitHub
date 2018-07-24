@@ -14,6 +14,7 @@ import PopularFragment2 from './activity/fragment/PopularFragment2';
 import MeFragment from './activity/fragment/MeFragment';
 import CustomKeyActivity from './activity/CustomKeyActivity';
 import SortKeyActivity from "./activity/SortKeyActivity";
+import RepositoryDetailActivity from "./activity/RepositoryDetailActivity";
 
 
 const Nick = createStackNavigator({
@@ -31,6 +32,7 @@ const Nick = createStackNavigator({
     MeFragment:{screen:MeFragment},
     CustomKeyActivity:{screen:CustomKeyActivity},
     SortKeyActivity:{screen:SortKeyActivity},
+    RepositoryDetailActivity:{screen:RepositoryDetailActivity},
 },{
     initialRouteName:'MainActivity', 
     headerMode:'none',
