@@ -5,7 +5,6 @@
  */
 
 import React, {Component} from 'react';
-import TabNavigator from 'react-native-tab-navigator';
 import {Navigator} from 'react-native-deprecated-custom-components';
 import {StackNavigator,StackActions,NavigationActions} from 'react-navigation';
 import {

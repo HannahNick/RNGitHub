@@ -34,7 +34,7 @@ const Nick = createStackNavigator({
     SortKeyActivity:{screen:SortKeyActivity},
     RepositoryDetailActivity:{screen:RepositoryDetailActivity},
 },{
-    initialRouteName:'MainActivity', 
+    initialRouteName:'MainActivity',
     headerMode:'none',
 });
 

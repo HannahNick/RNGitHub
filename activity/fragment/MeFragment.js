@@ -14,8 +14,14 @@ export default class MeFragment extends Component{
         })
     }
 
+    toNativeActivity(){
+        NativeModules.HomeModule.doToast("来自RN的信息传递");
+    }
+
     show(){
-        NativeModules.mytoast.showToast("成功调起原生方法!!!牛逼");
+        NativeModules.mytoast.showToast("成功调起原生方法!!!牛逼",(msg)=>{
+            console.log(msg)
+        })
     }
 
     render(){
@@ -25,7 +31,8 @@ export default class MeFragment extends Component{
                 <Text style={styles.mine} onPress={()=>this.props.navigation.navigate("CustomKeyActivity",{isRemove:false})}>标签订阅</Text>
                 <Text style={styles.sortKey} onPress={()=>this.props.navigation.navigate("SortKeyActivity")}>标签排序</Text>
                 <Text style={styles.removeKey} onPress={()=>this.props.navigation.navigate("CustomKeyActivity",{isRemove:true})}>删除标签</Text>
-                <Text style={styles.grayStyle} onPress={()=>{this.show()}}>调用原生代码</Text>
+                <Text style={styles.grayStyle} onPress={()=>{this.toNativeActivity()}}>调用原生代码</Text>
+                <Text style={styles.removeKey} onPress={()=>{this.show()}}>调用原生代码2</Text>
             </View>
         )
     }

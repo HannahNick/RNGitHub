@@ -1,3 +1,2 @@
 rootProject.name = 'GithubProject'
-
-include ':app'
+include ':app', ':rnlib'
