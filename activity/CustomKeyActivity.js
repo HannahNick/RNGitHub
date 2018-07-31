@@ -5,10 +5,12 @@ import ViewUtil from '../js/utils/ViewUtil';
 import LanguageDao,{FLAG_LANGUAGE} from './expand/dao/LanguageDao';
 import CheckBox from 'react-native-check-box';
 import ArrayUtil from "../js/utils/ArrayUtil";
+import BackPressComponent from "../js/common/BackPressComponent";
 export default class CustomKeyActivity extends Component{
 
     constructor(props){
         super(props);
+        this.backPress = new BackPressComponent((e)=>this.onBackPress(e));
         this.isRemove = this.props.navigation.state.params.isRemove;
         this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key);
         this.changeValues=[];//用于保存用户操作的数据
@@ -17,8 +19,18 @@ export default class CustomKeyActivity extends Component{
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
+        this.backPress.componentDidMount();
         this.loadData();
+    }
+
+    componentWillUnmount() {
+        this.backPress.componentWillUnmount();
+    }
+
+    onBackPress(e){
+        this.goBack();
+        return true;
     }
 
     loadData(){

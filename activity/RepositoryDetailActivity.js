@@ -6,16 +6,31 @@ import React, {Component} from 'react';
 import {WebView, View, StyleSheet, Text, TextInput,DeviceEventEmitter} from 'react-native';
 import NavigationBar from "../NavigationBar";
 import ViewUtil from "../js/utils/ViewUtil";
+import BackPressComponent from "../js/common/BackPressComponent";
 
 export default class RepositoryDetailActivity extends Component {
     constructor(props) {
         super(props);
+        this.backPress = new BackPressComponent({backPress:(e)=>this.onBackPress(e)});
         const data=this.props.navigation.state.params.item;
         this.state = {
             url: data.html_url,
             title:data.full_name,
             canGoBack:false,
         }
+    }
+
+    componentDidMount() {
+        this.backPress.componentDidMount();
+    }
+
+    componentWillUnmount() {
+        this.backPress.componentWillUnmount();
+    }
+
+    onBackPress(e){
+        this.goBack();
+        return true;
     }
 
     /**
@@ -28,6 +43,7 @@ export default class RepositoryDetailActivity extends Component {
             this.props.navigation.goBack();
         }
     }
+
 
 
     onNavigationStateChange(e){

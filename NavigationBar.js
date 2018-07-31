@@ -1,7 +1,6 @@
-import {Component} from 'react';
+import React,{Component} from 'react';
 //类型检查的包
 import PropTypes from 'prop-types'
-import React from "react";
 import {View, Platform,StatusBar,StyleSheet,Text} from "react-native";
 
 const NAV_BAR_HEIGHT_ANDROID = 50;//安卓高度
@@ -9,7 +8,7 @@ const NAV_BAR_HEIGHT_IOS = 44;//IOS高度
 const STSTUS_BAR_HEIGHT = 20;//状态栏高度
 const StatusBarShape={//状态栏
     backgroundColor:PropTypes.string,
-    barStyle:PropTypes.oneOf('default','light-content','dark-content'),
+    barStyle:PropTypes.oneOf(['default','light-content','dark-content']),
     hidden:PropTypes.bool,
 };
 /**
@@ -19,7 +18,6 @@ export default class NavigationBar extends Component {
 
     //定义属性类型
     static propTypes = {
-        style: View.propTypes.style,//普通的viewStyle类型
         title: PropTypes.string,//记得导包
         titleView: PropTypes.element,//作为元素传进来
         hide: PropTypes.bool,//这里好神奇,bool类型是这么写的
@@ -32,6 +30,7 @@ export default class NavigationBar extends Component {
     static defaultProps={
         statusBar:{
             hidden:false,
+            barStyle:'light-content',
         }
     };
 
@@ -47,7 +46,7 @@ export default class NavigationBar extends Component {
         let status = <View style={[styles.statusBar,this.props.statusBar]}>
             <StatusBar {...this.props.statusBar}/>
         </View>;
-        //给传进来的title设置优先级
+        //给传进来的title设置优先级 如果titleView不为空
         let titleView = this.props.titleView ? this.props.titleView :
             <Text style={styles.title}>{this.props.title}</Text>;
         let content = <View style={styles.navBar}>

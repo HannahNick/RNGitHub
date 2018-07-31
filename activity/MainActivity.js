@@ -5,6 +5,7 @@ import React from "react";
 import PopularFragment from './fragment/PopularFragment';
 import MeFragment from './fragment/MeFragment';
 import Toast,{DURATION} from "react-native-easy-toast";
+import CodePush from "react-native-code-push";
 import RepositoryDetailActivity from "./RepositoryDetailActivity";
 
 export default class MainActivity extends Component{
@@ -21,6 +22,7 @@ export default class MainActivity extends Component{
         this.listener=DeviceEventEmitter.addListener("showToast",(text)=>{
             this.toast.show(text,DURATION.LENGTH_SHORT);
         });
+        CodePush.notifyAppReady()
     }
 
     componentWillUnmount() {
@@ -54,7 +56,9 @@ export default class MainActivity extends Component{
                         renderIcon={() => <Image style={styles.fragmentIcon} source={require('../res/images/Shopping_def.png')}/>}
                         renderSelectedIcon={() => <Image style={styles.fragmentIcon} source={require('../res/images/Shopping_sel.png')}/>}
                         onPress={() => this.setState({selectedTab: 'shopping'})}>
-                        <RepositoryDetailActivity/>
+                        <View style={styles.fragmentContain}>
+                            <Text>购物车</Text>
+                        </View>
                     </TabNavigator.Item>
                     <TabNavigator.Item
                         selected={this.state.selectedTab === 'me'}
