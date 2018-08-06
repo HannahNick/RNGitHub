@@ -38,16 +38,16 @@ export default class MeFragment extends Component{
             //安装完立即重启
             // mandatoryInstallMode:CodePush.InstallMode.IMMEDIATE,
             //安装完下次重启后更新
-            mandatoryInstallMode:CodePush.InstallMode.ON_NEXT_RESTART,
+            // mandatoryInstallMode:CodePush.InstallMode.ON_NEXT_RESTART,
             //安装完后进入后台重启更新
-            // mandatoryInstallMode:CodePush.InstallMode.ON_NEXT_RESUME,
+            mandatoryInstallMode:CodePush.InstallMode.ON_NEXT_RESUME,
         });
     }
 
     render(){
         return(
             <View style={styles.container}>
-                <NavigationBar title='我的' statusBar={{backgroundColor:'#2196F3'}}/>
+                <NavigationBar title='我的'/>
                 <Text style={styles.mine} onPress={()=>this.props.navigation.navigate("CustomKeyActivity",{isRemove:false})}>标签订阅</Text>
                 <Text style={styles.sortKey} onPress={()=>this.props.navigation.navigate("SortKeyActivity")}>标签排序</Text>
                 <Text style={styles.removeKey} onPress={()=>this.props.navigation.navigate("CustomKeyActivity",{isRemove:true})}>删除标签</Text>
@@ -62,6 +62,7 @@ export default class MeFragment extends Component{
 const styles = StyleSheet.create({
     container:{
         flex:1,
+        backgroundColor:'red',
     },
     mine:{
         height:40,

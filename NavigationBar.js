@@ -31,6 +31,7 @@ export default class NavigationBar extends Component {
         statusBar:{
             hidden:false,
             barStyle:'light-content',
+            backgroundColor:'#2196F3',
         }
     };
 
@@ -43,7 +44,7 @@ export default class NavigationBar extends Component {
     }
 
     render() {
-        let status = <View style={[styles.statusBar,this.props.statusBar]}>
+        let status = <View style={styles.statusBar}>
             <StatusBar {...this.props.statusBar}/>
         </View>;
         //给传进来的title设置优先级 如果titleView不为空

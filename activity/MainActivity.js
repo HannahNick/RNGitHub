@@ -1,12 +1,14 @@
 import {Component} from 'react'
 import TabNavigator from "react-native-tab-navigator";
-import {Image, StyleSheet, Text, View,DeviceEventEmitter} from "react-native";
+import {Image, StyleSheet, Text, View,DeviceEventEmitter,NativeModules} from "react-native";
 import React from "react";
 import PopularFragment from './fragment/PopularFragment';
 import MeFragment from './fragment/MeFragment';
 import Toast,{DURATION} from "react-native-easy-toast";
 import CodePush from "react-native-code-push";
 import RepositoryDetailActivity from "./RepositoryDetailActivity";
+import PhoneLoginActivity from "./PhoneLoginActivity";
+import TrendingFragment from "./fragment/TrendingFragment";
 
 export default class MainActivity extends Component{
 
@@ -14,7 +16,8 @@ export default class MainActivity extends Component{
         super(props);
         this.state = {
             selectedTab: 'home',
-        }
+        };
+        // this.getNativeData();
     }
 
     componentDidMount() {
@@ -27,6 +30,17 @@ export default class MainActivity extends Component{
 
     componentWillUnmount() {
         this.listener&&this.listener.remove();
+    }
+
+    getNativeData() {
+        NativeModules.HomeModule.jsActivity(
+            (successMsg) => {
+                this.props.navigation.navigate("PhoneLoginActivity")
+            },
+            (erroMsg) => {
+                alert(erroMsg)
+            }
+        );
     }
 
     render(){
@@ -48,7 +62,7 @@ export default class MainActivity extends Component{
                         renderSelectedIcon={() => <Image style={styles.fragmentIcon} source={require('../res/images/classification_sel.png')}/>}
                         onPress={() => this.setState({selectedTab: 'classification'})}>
                         <View style={styles.fragmentContain}>
-                            <Text>分类</Text>
+                            <TrendingFragment {...this.props}/>
                         </View>
                     </TabNavigator.Item>
                     <TabNavigator.Item

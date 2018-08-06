@@ -1,5 +1,6 @@
 
-import keys from '../../../res/data/keys.json';
+import keysData from '../../../res/data/keys';
+import langsData from '../../../res/data/langs';
 import {AsyncStorage,Alert} from 'react-native';
 export var FLAG_LANGUAGE={flag_language:'flag_language',flag_key:'flag_key'};
 export default class LanguageDao{
@@ -40,7 +41,7 @@ export default class LanguageDao{
                             reject(e);
                         }
                     }else{//如果数据库为空就返回默认的数据
-                        let data = this.flag===FLAG_LANGUAGE.flag_key?keys:null;
+                        let data = this.flag===FLAG_LANGUAGE.flag_key?keysData:langsData;
                         this.save(data);
                         resolve(data);
                     }

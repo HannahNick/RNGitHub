@@ -2,6 +2,7 @@ import { AppRegistry ,YellowBox} from 'react-native';
 import App from './App';
 import FirstActivity from "./activity/FirstActivity";
 import {createStackNavigator} from "react-navigation";
+import StackViewStyleInterpolator from "react-navigation/src/views/StackView/StackViewStyleInterpolator";
 import SecondActivity from "./activity/SecondActivity";
 import MainActivity from "./activity/MainActivity";
 import PhoneLoginActivity from "./activity/PhoneLoginActivity";

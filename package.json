@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "react-native-tab-navigator": "^0.3.4",
+    "GitHubTrending": "^3.0.0",
     "axios": "^0.18.0",
     "prop-types": "latest",
     "react": "16.3.1",
@@ -20,6 +20,7 @@
     "react-native-shadow": "^1.2.2",
     "react-native-sortable-listview": "^0.2.8",
     "react-native-svg": "^6.3.1",
+    "react-native-tab-navigator": "^0.3.4",
     "react-navigation": "^2.5.3"
   },
   "devDependencies": {
