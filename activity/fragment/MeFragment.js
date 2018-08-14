@@ -46,7 +46,7 @@ export default class MeFragment extends Component{
 
     render(){
         return(
-            <View style={styles.container}>
+            <View style={styles.tabContainer}>
                 <NavigationBar title='我的'/>
                 <Text style={styles.mine} onPress={()=>this.props.navigation.navigate("CustomKeyActivity",{isRemove:false})}>标签订阅</Text>
                 <Text style={styles.sortKey} onPress={()=>this.props.navigation.navigate("SortKeyActivity")}>标签排序</Text>
@@ -60,7 +60,7 @@ export default class MeFragment extends Component{
 }
 
 const styles = StyleSheet.create({
-    container:{
+    tabContainer:{
         flex:1,
         backgroundColor:'red',
     },

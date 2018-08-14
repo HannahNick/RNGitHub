@@ -101,7 +101,7 @@ export default class SortKeyActivity extends Component{
         </TouchableOpacity>;
 
         return(
-          <View style={styles.container}>
+          <View style={styles.tabContainer}>
               <NavigationBar title='标签排序'
                 leftButton={ViewUtils.getLeftButton(()=>this.onBack())}
                 rightButton={rightButton}
@@ -141,7 +141,7 @@ class SortCell extends Component{
 }
 
 const styles = StyleSheet.create({
-    container:{
+    tabContainer:{
         flex:1,
     },
     item:{

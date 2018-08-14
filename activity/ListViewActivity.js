@@ -75,7 +75,7 @@ export default class ListViewActivity extends Component{
 }
 
 const styles = StyleSheet.create({
-    container:{
+    tabContainer:{
         flex:1,
     },
     tips:{

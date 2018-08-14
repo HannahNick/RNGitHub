@@ -81,7 +81,7 @@ export default class PopularFragment extends Component{
         return(
             <View 
                 //这里要注意需要给父容器添加flex:1属性，否则看不到内容，无法自适应内容
-                style={styles.container}>
+                style={styles.tabContainer}>
                 <NavigationBar title="最热"/>
                 {content}
             </View>
@@ -210,7 +210,7 @@ class PopularTab extends Component{
     }
 }
 const styles = StyleSheet.create({
-    container:{
+    tabContainer:{
         flex: 1,
     },
     item_shadow:{

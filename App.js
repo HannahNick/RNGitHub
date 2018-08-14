@@ -54,7 +54,7 @@ export default class App extends Component<props> {
     render() {
         // const {navigate} = this.props.navigation;
         return (
-            <View style={styles.container}>
+            <View style={styles.tabContainer}>
                 {/*<Navigator
                     //1.先导入navigator组件
                     //2.初始化路由
@@ -93,7 +93,7 @@ export default class App extends Component<props> {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    tabContainer: {
         flex: 1,
         justifyContent:'center',
         backgroundColor: '#fff',

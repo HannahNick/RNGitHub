@@ -104,7 +104,7 @@ export default class NickListActivity extends Component{
 
     render(){
         return(
-            <View style={styles.container}>
+            <View style={styles.tabContainer}>
                 <ListView 
                     renderRow={this.renderItem}
                     dataSource={this.state.dataSource}
@@ -124,7 +124,7 @@ export default class NickListActivity extends Component{
 }
 
 const styles = StyleSheet.create({
-    container:{
+    tabContainer:{
         flex:1
     },
 

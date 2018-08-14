@@ -16,6 +16,9 @@ import MeFragment from './activity/fragment/MeFragment';
 import CustomKeyActivity from './activity/CustomKeyActivity';
 import SortKeyActivity from "./activity/SortKeyActivity";
 import RepositoryDetailActivity from "./activity/RepositoryDetailActivity";
+import FlatListActivity from "./activity/FlatListActivity";
+import FlatListActivity2 from "./activity/FlatListActivity2";
+import HeyGuysHome from "./activity/HeyGuysHome";
 
 
 const Nick = createStackNavigator({
@@ -34,8 +37,11 @@ const Nick = createStackNavigator({
     CustomKeyActivity:{screen:CustomKeyActivity},
     SortKeyActivity:{screen:SortKeyActivity},
     RepositoryDetailActivity:{screen:RepositoryDetailActivity},
+    FlatListActivity:{screen:FlatListActivity},
+    FlatListActivity2:{screen:FlatListActivity2},
+    HeyGuysHome:{screen:HeyGuysHome}
 },{
-    initialRouteName:'MainActivity',
+    initialRouteName:'HeyGuysHome',
     headerMode:'none',
 });
 

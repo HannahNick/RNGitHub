@@ -54,7 +54,7 @@ export default class RepositoryDetailActivity extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={styles.tabContainer}>
                 <NavigationBar title={this.state.title} leftButton={ViewUtil.getLeftButton(()=>{this.goBack()})}/>
                 <WebView
                     ref={webView=>this.webView=webView}
@@ -70,7 +70,7 @@ export default class RepositoryDetailActivity extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    tabContainer: {
         flex: 1,
     },
     searchContain: {

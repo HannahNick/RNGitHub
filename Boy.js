@@ -13,7 +13,7 @@ export default class Boy extends Component {
 
     render(){
         return(
-          <View style={styles.container}>
+          <View style={styles.tabContainer}>
               <Text style={styles.text}>I am boy</Text>
               <Text style={styles.text}
                     onPress={()=>{
@@ -39,7 +39,7 @@ export default class Boy extends Component {
 
 
 const styles = StyleSheet.create({
-    container:{
+    tabContainer:{
         flex:1,
         justifyContent:'center',
         backgroundColor:'gray',

@@ -45,7 +45,7 @@ export default class MainActivity extends Component{
 
     render(){
         return (
-            <View style={styles.container}>
+            <View style={styles.tabContainer}>
                 <TabNavigator hidesTabTouch={true}>
                     <TabNavigator.Item
                         selected={this.state.selectedTab === 'home'}
@@ -90,7 +90,7 @@ export default class MainActivity extends Component{
 }
 
 const styles = StyleSheet.create({
-    container: {
+    tabContainer: {
         flex: 1,
         backgroundColor: '#F5FCFF',
     },

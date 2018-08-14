@@ -13,7 +13,7 @@ export default class Girl extends Component{
     render(){
 
         return(
-            <View style={styles.container}>
+            <View style={styles.tabContainer}>
                 <Text style={styles.text}>I am Girl</Text>
                 <Text style={styles.text}>我收到了男孩:{this.props.word}</Text>
                 <Text style={styles.text} onPress={()=>{
@@ -28,7 +28,7 @@ export default class Girl extends Component{
 }
 
 const styles = StyleSheet.create({
-    container:{
+    tabContainer:{
         flex:1,
         justifyContent:'center',
         backgroundColor:'red',

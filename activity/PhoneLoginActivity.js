@@ -41,7 +41,7 @@ export default class PhoneLoginActivity extends Component{
     render(){
         const {navigate} = this.props.navigation;
         return (
-            <View style={styles.container}>
+            <View style={styles.tabContainer}>
                 <Image style={styles.logo} source={require('../res/images/edition_ip.png')}/>
                 <View style={styles.inputTextContain}>
                     <Image style={styles.userIcon} source={require('../res/images/user.png')}/>
@@ -73,7 +73,7 @@ export default class PhoneLoginActivity extends Component{
 }
 
 const styles = StyleSheet.create({
-    container:{
+    tabContainer:{
         flex:1,
         flexDirection:'column',
         alignItems:'center',

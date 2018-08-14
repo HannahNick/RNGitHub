@@ -60,7 +60,7 @@ export default class NavigationBar extends Component {
 
         return (
             //这里表示的意思是允许使用用户外部传来的样式
-        <View style={[styles.container,this.props.style]}>
+        <View style={[styles.tabContainer,this.props.style]}>
             {status}
             {content}
         </View>);
@@ -69,7 +69,7 @@ export default class NavigationBar extends Component {
 
 
 const styles = StyleSheet.create({
-    container: {
+    tabContainer: {
         backgroundColor: '#2196F3',
     },
     navBar: {

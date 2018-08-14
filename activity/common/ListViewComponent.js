@@ -63,7 +63,7 @@ export default class ListViewComponent extends Component{
 
     render(){
         return (
-            <View style={styles.container}>
+            <View style={styles.tabContainer}>
                 <ListView
                 dataSource={this.state.dataSource}
                 renderRow={this.renderItem}
@@ -80,7 +80,7 @@ export default class ListViewComponent extends Component{
 }
 
 const styles = StyleSheet.create({
-    container:{
+    tabContainer:{
         flex: 1,
     }, 
     itemContainer:{
