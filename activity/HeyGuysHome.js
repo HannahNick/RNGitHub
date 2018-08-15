@@ -5,7 +5,6 @@ import React, {Component} from 'react';
 import {FlatList, StyleSheet, Alert, View, Text, Image, VirtualizedList, ListView, Platform} from 'react-native';
 import ScrollableTabView, {ScrollableTabBar, DefaultTabBar} from "react-native-scrollable-tab-view";
 import CustomTabBar from "./common/CustomTabBar";
-import Placeholder from 'rn-placeholder';
 import TofuComponent from "./common/TofuComponent";
 import HeyGuysRecommendComponent from "./common/HeyGuysRecommendComponent";
 import LauncherComponent from "./common/LauncherComponent";
@@ -77,7 +76,7 @@ export default class HeyGuysHome extends Component {
      * @param size
      */
     getTofuType(data, size) {
-        return <TofuComponent data={data} tofuNum={size}/>;
+        return (<TofuComponent data={data} tofuNum={size}/>);
     }
 
     /**
@@ -86,7 +85,7 @@ export default class HeyGuysHome extends Component {
      * @returns {*}
      */
     getLauncherType(data) {
-        return <LauncherComponent data={data}/>
+        return (<LauncherComponent data={data}/>)
     }
 
     /**
@@ -95,7 +94,7 @@ export default class HeyGuysHome extends Component {
      * @returns {*}
      */
     getNewGoodsType(data) {
-        return <NewGoodsComponent data={data}/>
+        return (<NewGoodsComponent data={data}/>)
     }
 
     /**
@@ -104,7 +103,7 @@ export default class HeyGuysHome extends Component {
      * @returns {*}
      */
     getBrandDayType(data) {
-        return <BrandDayComponent data={data}/>
+        return (<BrandDayComponent data={data}/>)
     }
 
     /**
@@ -113,7 +112,7 @@ export default class HeyGuysHome extends Component {
      * @returns {*}
      */
     getHeyGuysRecommendType(data) {
-        return <HeyGuysRecommendComponent data={data}/>
+        return (<HeyGuysRecommendComponent data={data}/>)
     }
 
     /**

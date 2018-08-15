@@ -23,7 +23,7 @@ export default class HomeBanner extends React.Component {
 
     render () {
         const { data } = this.props;
-        const elements = data.map((element, index) => this.renderItem(element, index))
+        const elements = data.map((element, index) => this.renderItem(element, index));
         console.log(`HomeBanner: ${JSON.stringify(data)}`);
         return (
             <View style={styles.container}>

@@ -107,8 +107,8 @@ export default class DataRepository{
     saveRepository(url,items,callBack){
         if (!url || !items) return;
         //定义个对象用来保存网络数据的时间戳
-        let wrapData = {items:items,update_data:new Date().getTime()};
-        AsyncStorage.setItem(url,JSON.stringify(wrapData),callBack);
+        // let wrapData = {items:items,update_data:new Date().getTime()};
+        AsyncStorage.setItem(url,JSON.stringify(items),callBack);
     }
 
     /**

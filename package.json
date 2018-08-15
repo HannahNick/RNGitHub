@@ -18,6 +18,7 @@
     "react-native-easy-toast": "^1.1.0",
     "react-native-scrollable-tab-view": "^0.8.0",
     "react-native-shadow": "^1.2.2",
+    "react-native-snap-carousel": "^3.7.2",
     "react-native-sortable-listview": "^0.2.8",
     "react-native-svg": "^6.3.1",
     "react-native-swiper": "^1.5.13",
