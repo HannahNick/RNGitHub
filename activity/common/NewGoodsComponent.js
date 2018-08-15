@@ -38,6 +38,11 @@ export default class NewGoodsComponent extends Component{
 }
 
 const styles = StyleSheet.create({
+    //楼层顶部图
+    topImg: {
+        height: 60,
+        resizeMode: 'stretch',
+    },
     //新品上市
     newsGoodContainer: {
         height: 190,
