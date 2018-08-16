@@ -2,7 +2,19 @@
  * Created by nick on 2018/8/8
  */
 import React, {Component} from 'react';
-import {FlatList, StyleSheet, Alert, View, Text, Image, VirtualizedList, ListView, Platform} from 'react-native';
+import {
+    FlatList,
+    StyleSheet,
+    Alert,
+    View,
+    Text,
+    Image,
+    VirtualizedList,
+    ListView,
+    Platform,
+    RefreshControl,
+    SafeAreaView
+} from 'react-native';
 import ScrollableTabView, {ScrollableTabBar, DefaultTabBar} from "react-native-scrollable-tab-view";
 import CustomTabBar from "./common/CustomTabBar";
 import TofuComponent from "./common/TofuComponent";
@@ -13,6 +25,7 @@ import HttpManager from "./manager/HttpManager";
 import BrandDayComponent from "./common/BrandDayComponent";
 import News from "./common/News";
 import HomeBanner from "./common/HomeBanner";
+import CustomPlaceholder from "./common/CustomPlaceholder";
 
 const REQUEST_URL = "https://shop.ap-ec.cn/CMS-COMPONENTSETTING-SERVICE/cmsComponentValue/getSettingByFileId.apec2";
 
@@ -23,12 +36,36 @@ export default class HeyGuysHome extends Component {
         this.state = {
             loaded: false,
             data: [],
+            isLoading: false,
         };
-        this.httpManager = new HttpManager();
+        this.httpManager = new HttpManager(this.dataCallBack);
     }
 
+    dataCallBack = (success, result) => {
+        if (success) {
+            const data = result.data;
+            let szCity = [];
+            for (let i = 0; i < data.length; i++) {
+                const content = data[i];
+                if (content.cityId === "100") {
+                    szCity.push(content);
+                }
+            }
+            this.setState({
+                data: [].concat(szCity),
+                loaded: true,
+            });
+        } else {
+            Alert.alert(result);
+        }
+        this.setState({
+            isLoading: false,
+        })
+    };
+
     componentDidMount() {
-        this.doPost(REQUEST_URL);
+        // this.doPost(REQUEST_URL);
+        this.httpManager.getHomeData(REQUEST_URL);
     }
 
     doPost(url) {
@@ -62,10 +99,14 @@ export default class HeyGuysHome extends Component {
                 }
                 this.setState({
                     data: [].concat(szCity),
-                    loaded: true
+                    loaded: true,
                 });
             }).catch(error => {
             Alert.alert(error);
+        }).finally(() => {
+            this.setState({
+                isLoading: false,
+            });
         });
     }
 
@@ -128,7 +169,7 @@ export default class HeyGuysHome extends Component {
      * @param data
      * @returns {*}
      */
-    getHomeBanner(data){
+    getHomeBanner(data) {
         return (<HomeBanner data={data}/>)
     }
 
@@ -160,20 +201,26 @@ export default class HeyGuysHome extends Component {
     }
 
     /**
-     * loading提示
+     * 首次进入loading提示
      * @returns {*}
      */
     renderLoadingView() {
         return (
-            <View style={styles.loading}>
-                <Text>Loading....</Text>
+            <View style={styles.contain}>
+                <CustomPlaceholder onReady={this.state.loaded} bgColor="red" animate="fade">
+
+                </CustomPlaceholder>
             </View>
         )
     }
 
-    onClickListener = () => {
+    loadData() {
+        this.setState({
+            isLoading: true,
+        });
+        this.doPost(REQUEST_URL);
 
-    };
+    }
 
     /**
      * 分割线
@@ -198,23 +245,40 @@ export default class HeyGuysHome extends Component {
         if (!this.state.loaded) {
             return this.renderLoadingView();
         }
-
         return (
             <FlatList
                 data={this.state.data}
+                extraData={this.state}
                 renderItem={(data) => this.renderItemView(data)}
                 style={styles.list}
                 keyExtractor={this._keyExtractor}
                 showsVerticalScrollIndicator={false}
+                refreshControl={//自定义刷新组件
+                    <RefreshControl
+                        title={'loading'}
+                        colors={['red', 'green', 'blue']}
+                        refreshing={this.state.isLoading}//刷新状态标志
+                        onRefresh={() => {
+                            //刷新调用的方法
+                            this.loadData();
+                        }}
+                        tintColor={'orange'}//ios菊花颜色
+                        titleColor={'red'}//ios文本颜色
+                    />
+                }
                 // ItemSeparatorComponent={this._separator}
             />
-
         )
     }
 
 }
 
 const styles = StyleSheet.create({
+    contain:{
+        flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     list: {
         flex: 1,
         backgroundColor: 'white'
