@@ -1,13 +1,13 @@
 /**
- * Created by nick on 2018/8/8
+ * Created by nick on 2018/8/22
  */
 
 import React,{Component} from 'react'
-import {FlatList, Image, StyleSheet, Text, View} from "react-native";
+import {SwipeableFlatList, TouchableHighlight,Image, StyleSheet, Text, View ,Alert} from "react-native";
 
 var REQUEST_URL =
     "https://raw.githubusercontent.com/facebook/react-native/0.51-stable/docs/MoviesExample.json";
-export default class FlatListActivity2 extends Component{
+export default class SwipeableFlatListActivity extends Component{
 
     constructor(props){
         super(props);
@@ -20,18 +20,44 @@ export default class FlatListActivity2 extends Component{
 
     _keyExtractor = (item, index) => item.id;
 
+    /**
+     * 侧滑点击删除时删除item
+     * @param item
+     */
+    deleteItem({item}){
+        let {data} = this.state;
+        data.splice(data.findIndex(obj=>obj.id===item.id),1);//这个删除方法很不错
+        this.setState({
+            data:data,
+        })
+    }
+
+    genQuickActions(data){
+        return <View style={styles.quickContainer}>
+            <TouchableHighlight style={styles.quick} onPress={()=>this.deleteItem(data)}>
+                <View >
+                    <Text >删除</Text>
+                </View>
+            </TouchableHighlight>
+        </View>
+    }
+
+
     render(){
         if (!this.state.loaded) {
             return this.renderLoadingView();
         }
 
         return (
-            <FlatList
+            <SwipeableFlatList
                 data={this.state.data}
                 renderItem={(data)=>this.renderMovie(data)}
                 style={styles.list}
                 keyExtractor={this._keyExtractor}
                 ItemSeparatorComponent={this._separator}
+                //以下是该列表特有属性
+                renderQuickActions={(data)=>this.genQuickActions(data)}//渲染侧滑的样式
+                maxSwipeDistance={100}//最大策划距离
             />
         )
     }
@@ -83,8 +109,10 @@ export default class FlatListActivity2 extends Component{
 }
 
 const styles = StyleSheet.create({
+
     tabContainer:{
         flexDirection: 'row',
+        backgroundColor:'#F5FCFF',
     },
     loading: {
         flex: 1,
@@ -107,10 +135,22 @@ const styles = StyleSheet.create({
     thumbnail: {
         width: 100,
         height: 100,
-        resizeMode:'contain'
+        resizeMode:'stretch'
     },
     list: {
         paddingTop: 20,
         backgroundColor: "#F5FCFF"
+    },
+    quickContainer:{
+        flex:1,
+        flexDirection:'row',
+        justifyContent:'flex-end',
+    },
+    quick:{
+        backgroundColor:'red',
+        justifyContent:'center',
+        alignItems:'center',
+        width: 100,
+
     }
 });

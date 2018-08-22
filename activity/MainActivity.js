@@ -25,7 +25,11 @@ export default class MainActivity extends Component{
         this.listener=DeviceEventEmitter.addListener("showToast",(text)=>{
             this.toast.show(text,DURATION.LENGTH_SHORT);
         });
-        CodePush.notifyAppReady()
+        CodePush.sync({
+            deploymentKey: 'T2ZgoQrBP19-1WDEBq2ZY-7LoJtvfdd47ca3-04ad-4dec-92fd-5ba2ca52ba27',
+            installMode: CodePush.InstallMode.IMMEDIATE
+        });
+
     }
 
     componentWillUnmount() {
