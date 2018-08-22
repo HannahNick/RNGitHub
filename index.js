@@ -20,6 +20,7 @@ import FlatListActivity from "./activity/FlatListActivity";
 import FlatListActivity2 from "./activity/FlatListActivity2";
 import HeyGuysHome from "./activity/HeyGuysHome";
 import SwipeableFlatListActivity from "./activity/SwipeableFlatListActivity";
+import SectionListActivity from "./activity/SectionListActivity";
 
 const Nick = createStackNavigator({
     App:{screen:App},
@@ -40,9 +41,10 @@ const Nick = createStackNavigator({
     FlatListActivity:{screen:FlatListActivity},
     FlatListActivity2:{screen:FlatListActivity2},
     HeyGuysHome:{screen:HeyGuysHome},
-    SwipeableFlatListActivity:{screen:SwipeableFlatListActivity}
+    SwipeableFlatListActivity:{screen:SwipeableFlatListActivity},
+    SectionListActivity:{screen:SectionListActivity}
 },{
-    initialRouteName:'SwipeableFlatListActivity',
+    initialRouteName:'SectionListActivity',
     headerMode:'none',
 });
 
