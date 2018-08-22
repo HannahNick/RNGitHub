@@ -1,7 +1,7 @@
-import { AppRegistry ,YellowBox} from 'react-native';
+import {AppRegistry, Image, YellowBox} from 'react-native';
 import App from './App';
 import FirstActivity from "./activity/FirstActivity";
-import {createStackNavigator} from "react-navigation";
+import {createStackNavigator,createBottomTabNavigator} from "react-navigation";
 import StackViewStyleInterpolator from "react-navigation/src/views/StackView/StackViewStyleInterpolator";
 import SecondActivity from "./activity/SecondActivity";
 import MainActivity from "./activity/MainActivity";
@@ -21,13 +21,19 @@ import FlatListActivity2 from "./activity/FlatListActivity2";
 import HeyGuysHome from "./activity/HeyGuysHome";
 import SwipeableFlatListActivity from "./activity/SwipeableFlatListActivity";
 import SectionListActivity from "./activity/SectionListActivity";
+import Boy from "./Boy";
+import Girl from "./Girl";
+import React from "react";
+import {bottomTabNavigator} from './navigators/AppStackNavigator'
+
+
 
 const Nick = createStackNavigator({
     App:{screen:App},
     PhoneLoginActivity:{screen:PhoneLoginActivity},
     FirstActivity:{screen:FirstActivity},
     SecondActivity:{screen:SecondActivity},
-    MainActivity:{screen:MainActivity},
+    MainActivity:{screen:MainActivity,navigationOptions:{title:"最热"}},
     ListViewActivity:{screen:ListViewActivity},
     NickListActivity:{screen:NickListActivity},
     NickListActivity2:{screen:NickListActivity2},
@@ -42,11 +48,16 @@ const Nick = createStackNavigator({
     FlatListActivity2:{screen:FlatListActivity2},
     HeyGuysHome:{screen:HeyGuysHome},
     SwipeableFlatListActivity:{screen:SwipeableFlatListActivity},
-    SectionListActivity:{screen:SectionListActivity}
+    SectionListActivity:{screen:SectionListActivity},
+    Boy:{screen:Boy,navigationOptions: {title:"Boy"}},
+    Girl:{screen:Girl,navigationOptions: ({navigation})=>({title:navigation.state.params.word})},
+    BottomTestMenu:{screen:bottomTabNavigator},//把Tab页作为一个Activity,也可以把它当做一个根节点
 },{
-    initialRouteName:'SectionListActivity',
-    headerMode:'none',
+    initialRouteName:'MainActivity',
+    headerMode:'none'
+
 });
+
 
 AppRegistry.registerComponent('GithubProject',()=>Nick);
 

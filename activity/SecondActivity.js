@@ -15,38 +15,7 @@ export default class SecondActivity extends Component {
 
     render() {
         return (<View style={styles.contain}>
-            {/*<Text style={styles.fontType}>{this.props.word}</Text>*/}
-            {/*<Text style={styles.fontType}*/}
-                  {/*onPress={()=>{*/}
-                        {/*this.props.navigation.goBack();*/}
-                  {/*}}*/}
-            {/*>返回上级页面</Text>*/}
-            {/* <Text style={styles.textType1}>这里是Text1</Text>  */}
-            {/* <Text style={styles.textType2}>这里是Text2</Text> */}
-            {/* <Text style={styles.textType3}>这里是Text3</Text> */}
-            
-            <NavigationBar 
-                title='SecondActivity' 
-                style={{
-                    backgroundColor:'#EE6363',
-                }} 
-                rightButton={
-                    <TouchableOpacity onPress={()=>{
-                        this.props.navigation.pop();
-                    }}> 
-                        <Image 
-                        style={{width:20,height:20,resizeMode:'contain'}}
-                        source={require('../res/images/share.png')} />
-                    </TouchableOpacity>
-                } 
-                leftButton={ 
-                    <TouchableHighlight>
-                        <Image source={require('../res/images/arrow_back.png')}
-                            style={{width:20,height:20,resizeMode:'contain'}}
-                        />
-                    </TouchableHighlight>
-                }
-            />
+
         </View>)
     }
 

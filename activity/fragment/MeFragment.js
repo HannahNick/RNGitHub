@@ -44,6 +44,10 @@ export default class MeFragment extends Component{
         });
     }
 
+    toBottomTabActivity(){
+        this.props.navigation.navigate("BottomTestMenu");
+    }
+
     render(){
         return(
             <View style={styles.tabContainer}>
@@ -54,6 +58,7 @@ export default class MeFragment extends Component{
                 <Text style={styles.grayStyle} onPress={()=>{this.toNativeActivity()}}>调用原生代码</Text>
                 <Text style={styles.removeKey} onPress={()=>{this.show()}}>调用原生代码2</Text>
                 <Text style={styles.checkUpdate} onPress={()=>{this.update()}}>检查更新</Text>
+                <Text style={styles.sortKey} onPress={()=>{this.toBottomTabActivity()}}>跳到Tab页</Text>
             </View>
         )
     }
