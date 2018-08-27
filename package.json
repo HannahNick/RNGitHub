@@ -16,6 +16,7 @@
     "react-native-code-push": "^5.4.0",
     "react-native-deprecated-custom-components": "^0.1.2",
     "react-native-easy-toast": "^1.1.0",
+    "react-native-navigation": "^1.1.480",
     "react-native-scrollable-tab-view": "^0.8.0",
     "react-native-shadow": "^1.2.2",
     "react-native-snap-carousel": "^3.7.2",

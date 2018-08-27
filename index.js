@@ -1,7 +1,7 @@
 import {AppRegistry, Image, YellowBox} from 'react-native';
 import App from './App';
 import FirstActivity from "./activity/FirstActivity";
-import {createStackNavigator,createBottomTabNavigator} from "react-navigation";
+import {createStackNavigator, createBottomTabNavigator} from "react-navigation";
 import StackViewStyleInterpolator from "react-navigation/src/views/StackView/StackViewStyleInterpolator";
 import SecondActivity from "./activity/SecondActivity";
 import MainActivity from "./activity/MainActivity";
@@ -24,42 +24,41 @@ import SectionListActivity from "./activity/SectionListActivity";
 import Boy from "./Boy";
 import Girl from "./Girl";
 import React from "react";
-import {bottomTabNavigator} from './navigators/AppStackNavigator'
-
+import {bottomTabNavigator,DrawerNav} from './navigators/AppStackNavigator'
+import DrawerActivity from "./activity/DrawerActivity";
 
 
 const Nick = createStackNavigator({
-    App:{screen:App},
-    PhoneLoginActivity:{screen:PhoneLoginActivity},
-    FirstActivity:{screen:FirstActivity},
-    SecondActivity:{screen:SecondActivity},
-    MainActivity:{screen:MainActivity,navigationOptions:{title:"最热"}},
-    ListViewActivity:{screen:ListViewActivity},
-    NickListActivity:{screen:NickListActivity},
-    NickListActivity2:{screen:NickListActivity2},
-    FetchActivity:{screen:FetchActivity},
-    PopularFragment:{screen:PopularFragment},
-    PopularFragment2:{screen:PopularFragment2},
-    MeFragment:{screen:MeFragment},
-    CustomKeyActivity:{screen:CustomKeyActivity},
-    SortKeyActivity:{screen:SortKeyActivity},
-    RepositoryDetailActivity:{screen:RepositoryDetailActivity},
-    FlatListActivity:{screen:FlatListActivity},
-    FlatListActivity2:{screen:FlatListActivity2},
-    HeyGuysHome:{screen:HeyGuysHome},
-    SwipeableFlatListActivity:{screen:SwipeableFlatListActivity},
-    SectionListActivity:{screen:SectionListActivity},
-    Boy:{screen:Boy,navigationOptions: {title:"Boy"}},
-    Girl:{screen:Girl,navigationOptions: ({navigation})=>({title:navigation.state.params.word})},
-    BottomTestMenu:{screen:bottomTabNavigator},//把Tab页作为一个Activity,也可以把它当做一个根节点
-},{
-    initialRouteName:'MainActivity',
-    headerMode:'none'
+    App: {screen: App},
+    PhoneLoginActivity: {screen: PhoneLoginActivity},
+    FirstActivity: {screen: FirstActivity},
+    SecondActivity: {screen: SecondActivity},
+    MainActivity: {screen: MainActivity, navigationOptions: {title: "最热"}},
+    ListViewActivity: {screen: ListViewActivity},
+    NickListActivity: {screen: NickListActivity},
+    NickListActivity2: {screen: NickListActivity2},
+    FetchActivity: {screen: FetchActivity},
+    PopularFragment: {screen: PopularFragment},
+    PopularFragment2: {screen: PopularFragment2},
+    MeFragment: {screen: MeFragment},
+    CustomKeyActivity: {screen: CustomKeyActivity},
+    SortKeyActivity: {screen: SortKeyActivity},
+    RepositoryDetailActivity: {screen: RepositoryDetailActivity},
+    FlatListActivity: {screen: FlatListActivity},
+    FlatListActivity2: {screen: FlatListActivity2},
+    HeyGuysHome: {screen: HeyGuysHome},
+    SwipeableFlatListActivity: {screen: SwipeableFlatListActivity},
+    SectionListActivity: {screen: SectionListActivity},
+    Boy: {screen: Boy, navigationOptions: {title: "Boy"}},
+    Girl: {screen: Girl, navigationOptions: ({navigation}) => ({title: navigation.state.params.word})},
+    BottomTestMenu: {screen: bottomTabNavigator},//把Tab页作为一个Activity,也可以把它当做一个根节点
+    DrawerNav:{screen:DrawerNav},
+    DrawerActivity:{screen:DrawerActivity},
+}, {
+    initialRouteName: 'DrawerNav',
+    headerMode: 'none'
 
 });
+AppRegistry.registerComponent('GithubProject', () => Nick);
 
-
-AppRegistry.registerComponent('GithubProject',()=>Nick);
-
-// AppRegistry.registerComponent('GithubProject', () => FirstActivity);
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);

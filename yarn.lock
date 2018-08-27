@@ -3549,10 +3549,6 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
-lodash-es@^4.2.1:
-  version "4.17.10"
-  resolved "http://registry.npm.taobao.org/lodash-es/download/lodash-es-4.17.10.tgz#62cd7104cdf5dd87f235a837f0ede0e8e5117e05"
-
 lodash.pad@^4.1.0:
   version "4.5.1"
   resolved "http://registry.npm.taobao.org/lodash.pad/download/lodash.pad-4.5.1.tgz#4330949a833a7c8da22cc20f6a26c4d59debba70"
@@ -3573,13 +3569,13 @@ lodash.throttle@^4.1.1:
   version "4.1.1"
   resolved "http://registry.npm.taobao.org/lodash.throttle/download/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
 
+lodash@4.x.x, lodash@^4.0.0, lodash@^4.13.1, lodash@^4.16.6, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.6.1:
+  version "4.17.10"
+  resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
+
 lodash@^3.5.0:
   version "3.10.1"
   resolved "http://registry.npm.taobao.org/lodash/download/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
-
-lodash@^4.13.1, lodash@^4.16.6, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.1:
-  version "4.17.10"
-  resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
 longest@^1.0.1:
   version "1.0.1"
@@ -3882,10 +3878,6 @@ minizlib@^1.1.0:
   resolved "http://registry.npm.taobao.org/minizlib/download/minizlib-1.1.0.tgz#11e13658ce46bc3a70a267aac58359d1e0c29ceb"
   dependencies:
     minipass "^2.2.1"
-
-mitt@^1.1.2:
-  version "1.1.3"
-  resolved "http://registry.npm.taobao.org/mitt/download/mitt-1.1.3.tgz#528c506238a05dce11cd914a741ea2cc332da9b8"
 
 mixin-deep@^1.2.0:
   version "1.3.1"
@@ -4474,16 +4466,6 @@ qs@^6.5.1, qs@~6.5.1:
   version "6.5.2"
   resolved "http://registry.npm.taobao.org/qs/download/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
 
-ramda@^0.24.1:
-  version "0.24.1"
-  resolved "http://registry.npm.taobao.org/ramda/download/ramda-0.24.1.tgz#c3b7755197f35b8dc3502228262c4c91ddb6b857"
-
-ramdasauce@^2.0.0:
-  version "2.1.0"
-  resolved "http://registry.npm.taobao.org/ramdasauce/download/ramdasauce-2.1.0.tgz#65ea157a9cfc17841a7dd6499d3f9f421dc2eb36"
-  dependencies:
-    ramda "^0.24.1"
-
 randomatic@^3.0.0:
   version "3.0.0"
   resolved "http://registry.npm.taobao.org/randomatic/download/randomatic-3.0.0.tgz#d35490030eb4f7578de292ce6dfb04a91a128923"
@@ -4594,6 +4576,12 @@ react-native-easy-toast@^1.1.0:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-navigation@^1.1.480:
+  version "1.1.480"
+  resolved "http://registry.npm.taobao.org/react-native-navigation/download/react-native-navigation-1.1.480.tgz#7090a2adbc0399f223d8be906df33fbe12f6c272"
+  dependencies:
+    lodash "4.x.x"
+
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"
   resolved "http://registry.npm.taobao.org/react-native-safe-area-view/download/react-native-safe-area-view-0.7.0.tgz#38f5ab9368d6ef9e5d18ab64212938af3ec39421"
@@ -4661,6 +4649,14 @@ react-native-tab-view@^1.0.0:
   resolved "http://registry.npm.taobao.org/react-native-tab-view/download/react-native-tab-view-1.0.2.tgz#66e0bc6d38a227ed2b212e3a256b7902f6ce02ed"
   dependencies:
     prop-types "^15.6.1"
+
+react-native-vector-icons@^5.0.0:
+  version "5.0.0"
+  resolved "http://registry.npm.taobao.org/react-native-vector-icons/download/react-native-vector-icons-5.0.0.tgz#d0bd6fdda01159db409810718dd04904951a98f5"
+  dependencies:
+    lodash "^4.0.0"
+    prop-types "^15.5.10"
+    yargs "^8.0.2"
 
 react-native@0.55.4:
   version "0.55.4"
@@ -4802,27 +4798,6 @@ react@16.3.1:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-reactotron-core-client@^2.1.0:
-  version "2.1.0"
-  resolved "http://registry.npm.taobao.org/reactotron-core-client/download/reactotron-core-client-2.1.0.tgz#d36f806eaf14a9f8c4595a9866f8cbfaafc1ee8c"
-
-reactotron-react-native@^2.1.0:
-  version "2.1.0"
-  resolved "http://registry.npm.taobao.org/reactotron-react-native/download/reactotron-react-native-2.1.0.tgz#eefafb8d146e96f037c33ef5d57e5a4ada3124f7"
-  dependencies:
-    mitt "^1.1.2"
-    prop-types "^15.5.10"
-    reactotron-core-client "^2.1.0"
-
-reactotron-redux@^2.1.0:
-  version "2.1.0"
-  resolved "http://registry.npm.taobao.org/reactotron-redux/download/reactotron-redux-2.1.0.tgz#69568912e2894cb3d996843bdaa759c3ec59a45a"
-  dependencies:
-    ramda "^0.24.1"
-    ramdasauce "^2.0.0"
-    reactotron-core-client "^2.1.0"
-    redux "^3.7.1"
-
 read-pkg-up@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/read-pkg-up/download/read-pkg-up-1.0.1.tgz#9d63c13276c065918d57f002a57f40a1b643fb02"
@@ -4887,15 +4862,6 @@ rebound@^0.0.13:
 recursive-fs@0.1.4:
   version "0.1.4"
   resolved "http://registry.npm.taobao.org/recursive-fs/download/recursive-fs-0.1.4.tgz#47e08b1ddab8d7d9a960aa0d0daea76f875b63fa"
-
-redux@^3.7.1:
-  version "3.7.2"
-  resolved "http://registry.npm.taobao.org/redux/download/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
-  dependencies:
-    lodash "^4.2.1"
-    lodash-es "^4.2.1"
-    loose-envify "^1.1.0"
-    symbol-observable "^1.0.3"
 
 regenerate@^1.2.1:
   version "1.4.0"
@@ -5553,10 +5519,6 @@ supports-color@^5.3.0:
   dependencies:
     has-flag "^3.0.0"
 
-symbol-observable@^1.0.3:
-  version "1.2.0"
-  resolved "http://registry.npm.taobao.org/symbol-observable/download/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
-
 symbol-tree@^3.2.2:
   version "3.2.2"
   resolved "http://registry.npm.taobao.org/symbol-tree/download/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
@@ -6033,6 +5995,24 @@ yargs@^11.0.0:
     which-module "^2.0.0"
     y18n "^3.2.1"
     yargs-parser "^9.0.2"
+
+yargs@^8.0.2:
+  version "8.0.2"
+  resolved "http://registry.npm.taobao.org/yargs/download/yargs-8.0.2.tgz#6299a9055b1cefc969ff7e79c1d918dceb22c360"
+  dependencies:
+    camelcase "^4.1.0"
+    cliui "^3.2.0"
+    decamelize "^1.1.1"
+    get-caller-file "^1.0.1"
+    os-locale "^2.0.0"
+    read-pkg-up "^2.0.0"
+    require-directory "^2.1.1"
+    require-main-filename "^1.0.1"
+    set-blocking "^2.0.0"
+    string-width "^2.0.0"
+    which-module "^2.0.0"
+    y18n "^3.2.1"
+    yargs-parser "^7.0.0"
 
 yargs@^9.0.0:
   version "9.0.1"
