@@ -1,7 +1,7 @@
-import {AppRegistry, Image, YellowBox} from 'react-native';
+import {AppRegistry, YellowBox} from 'react-native';
 import App from './App';
 import FirstActivity from "./activity/FirstActivity";
-import {createStackNavigator, createBottomTabNavigator} from "react-navigation";
+import {createStackNavigator, createBottomTabNavigator, withNavigationFocus} from "react-navigation";
 import StackViewStyleInterpolator from "react-navigation/src/views/StackView/StackViewStyleInterpolator";
 import SecondActivity from "./activity/SecondActivity";
 import MainActivity from "./activity/MainActivity";
@@ -26,6 +26,7 @@ import Girl from "./Girl";
 import React from "react";
 import {bottomTabNavigator,DrawerNav} from './navigators/AppStackNavigator'
 import DrawerActivity from "./activity/DrawerActivity";
+import FocusTest from "./FocusTest";
 
 
 const Nick = createStackNavigator({
@@ -54,8 +55,9 @@ const Nick = createStackNavigator({
     BottomTestMenu: {screen: bottomTabNavigator},//把Tab页作为一个Activity,也可以把它当做一个根节点
     DrawerNav:{screen:DrawerNav},
     DrawerActivity:{screen:DrawerActivity},
+    FocusTest:{screen:FocusTest}
 }, {
-    initialRouteName: 'DrawerNav',
+    initialRouteName: 'Boy',
     headerMode: 'none'
 
 });

@@ -2,6 +2,8 @@ import {Component} from 'react'
 import {StyleSheet,View, Text} from 'react-native'
 import React from "react";
 import Girl from "./Girl"
+import FocusTest from "./FocusTest";
+import MenuDialog from "./activity/MenuDialog";
 export default class Boy extends Component {
     state = {
         word:''
@@ -45,6 +47,9 @@ export default class Boy extends Component {
               {/*{this.navigatorButton()}*/}
               {this.navigationButton()}
               <Text style={styles.text}>{this.state.word}</Text>
+              <FocusTest/>
+              <Text onPress={()=>this.dialog.show()}>弹窗出来!</Text>
+              <MenuDialog ref={dialog=>this.dialog = dialog}/>
           </View>
         );
     }
@@ -53,9 +58,8 @@ export default class Boy extends Component {
 
 const styles = StyleSheet.create({
     tabContainer:{
-        flex:1,
-        justifyContent:'center',
-        backgroundColor:'gray',
+        height:100,
+        backgroundColor:'red'
     },
     text:{
         fontSize:20,

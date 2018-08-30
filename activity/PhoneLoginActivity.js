@@ -4,6 +4,7 @@ import {Image, TextInput, View, StyleSheet, Text, TouchableHighlight} from "reac
 import MainActivity from './MainActivity';
 import FirstActivity from './FirstActivity';
 import NavigationBar from "../NavigationBar";
+import NavigationUtil from "../js/utils/NavigationUtil";
 export default class PhoneLoginActivity extends Component{
 
     state={
@@ -39,7 +40,7 @@ export default class PhoneLoginActivity extends Component{
     }
 
     render(){
-        const {navigate} = this.props.navigation;
+        const navigation = this.props.navigation;
         return (
             <View style={styles.tabContainer}>
                 <Image style={styles.logo} source={require('../res/images/edition_ip.png')}/>
@@ -58,7 +59,7 @@ export default class PhoneLoginActivity extends Component{
                     activeOpacity={0.9}
                     underlayColor={'#FFE289'}
                     onPress={()=>{
-                        // navigate('FirstActivity')
+                        NavigationUtil.resetToHomePage({navigation:navigation});
                     }}
                 >
                     <View style={styles.loginContainer}>

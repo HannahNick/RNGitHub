@@ -5,6 +5,7 @@ import {StackNavigator} from 'react-navigation';
 import SecondActivity from "./SecondActivity";
 import Toast,{DURATION} from 'react-native-easy-toast';
 import axios from 'axios';
+import NavigationUtil from "../js/utils/NavigationUtil";
 
 const KEY = "nick";
 export default class FirstActivity extends Component{
@@ -80,23 +81,23 @@ export default class FirstActivity extends Component{
                   {/*onPress={()=>{*/}
                 {/*navigate('PhoneLoginActivity')*/}
             {/*}}>推荐跳转方式2</Text>*/}
-            <View style={styles.text1TypeContain}>
-                <Text style={styles.text1Type } onPress={()=>{
-                    AsyncStorage.setItem(KEY,"123",error=>{
-                        error?this.toast.show("保存失败"):this.toast.show("保存成功");
-                    })
-                }}>保存参数</Text>
-            </View>
-            <Text style={styles.text2Type} onPress={()=>{
-                    AsyncStorage.getItem(KEY,(error,content)=>{
-                        error?this.toast.show("没有相应值"):this.toast.show("获取值>>>"+content);
-                    }) }}>获取参数</Text>
-            <Text style={styles.text3Type} onPress={()=>{
-                    AsyncStorage.removeItem(KEY,(error,content)=>{
-                        error?this.toast.show("移除失败"):this.toast.show("移除成功>>>"+content);
-                    }) }}>移除参数</Text>
-            <Toast ref={toast=>this.toast=toast}/>
-            {/*<Text style={styles.text}>{this.props.navigation.state.params.word}</Text>*/}
+            {/*<View style={styles.text1TypeContain}>*/}
+                {/*<Text style={styles.text1Type } onPress={()=>{*/}
+                    {/*AsyncStorage.setItem(KEY,"123",error=>{*/}
+                        {/*error?this.toast.show("保存失败"):this.toast.show("保存成功");*/}
+                    {/*})*/}
+                {/*}}>保存参数</Text>*/}
+            {/*</View>*/}
+            {/*<Text style={styles.text2Type} onPress={()=>{*/}
+                    {/*AsyncStorage.getItem(KEY,(error,content)=>{*/}
+                        {/*error?this.toast.show("没有相应值"):this.toast.show("获取值>>>"+content);*/}
+                    {/*}) }}>获取参数</Text>*/}
+            {/*<Text style={styles.text3Type} onPress={()=>{*/}
+                    {/*AsyncStorage.removeItem(KEY,(error,content)=>{*/}
+                        {/*error?this.toast.show("移除失败"):this.toast.show("移除成功>>>"+content);*/}
+                    {/*}) }}>移除参数</Text>*/}
+            {/*<Toast ref={toast=>this.toast=toast}/>*/}
+            <Text style={styles.text} onPress={()=>NavigationUtil.popToPopPage({navigation:this.props.navigation})}>{this.props.navigation.state.params.word}</Text>
  
         </View>) 
     }
