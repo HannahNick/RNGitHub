@@ -10,7 +10,7 @@ import {StyleSheet,
     } from 'react-native';
 import NavigationBar from '../../NavigationBar';
 import DataRepository,{FLAG_STORAGE} from '../expand/dao/DataRepository';
-import ScrollableTabView,{ScrollableTabBar} from 'react-native-scrollable-tab-view';
+import ScrollableTabView,{ScrollableTabBar,DefaultTabBar} from 'react-native-scrollable-tab-view';
 import LanguageDao,{FLAG_LANGUAGE} from "../expand/dao/LanguageDao";
 import RepositoryDetailActivity from "../RepositoryDetailActivity";
 
@@ -66,6 +66,8 @@ export default class PopularFragment extends Component{
 
     render(){
         //这个和android的TabLayou很像
+        const containerWidth = this.props.containerWidth;
+        const numberOfTabs = this.props.tabs.length;
         let content = this.state.language.length>0?<ScrollableTabView
             tabBarBackgroundColor='#2196F3'
             //未选中状态的tab文字颜色
@@ -74,7 +76,8 @@ export default class PopularFragment extends Component{
             tabBarActiveTextColor="white"
             tabBarUnderlineStyle={{backgroundColor:'#e7e7e7',height:2}}
             //这里要注意导包，和ScrollableTabView一起使用的
-            renderTabBar={()=><ScrollableTabBar/>}
+            renderTabBar={()=><DefaultTabBar
+                tabStyle={{flex: 1, paddingBottom: 5}}/>}
         >
             {this.renderTab()}
         </ScrollableTabView>:null;

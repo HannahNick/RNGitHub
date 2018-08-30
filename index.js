@@ -55,9 +55,9 @@ const Nick = createStackNavigator({
     BottomTestMenu: {screen: bottomTabNavigator},//把Tab页作为一个Activity,也可以把它当做一个根节点
     DrawerNav:{screen:DrawerNav},
     DrawerActivity:{screen:DrawerActivity},
-    FocusTest:{screen:FocusTest}
+    FocusTest:{screen:FocusTest},
 }, {
-    initialRouteName: 'Boy',
+    initialRouteName: 'MainActivity',   
     headerMode: 'none'
 
 });
