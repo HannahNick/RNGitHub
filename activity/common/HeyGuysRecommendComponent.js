@@ -10,22 +10,16 @@ export default class HeyGuysRecommendComponent extends Component{
 
     constructor(props){
         super(props);
+        this.tablistArray=this.props.data;//每个Tab对应列表的数据
+        const goodsData = this.tablistArray[0].goods.rows;
+        if (goodsData.length % 2 !== 0) {
+            goodsData.push(goodsData[goodsData.length-1]);
+        }
+        const listHeight = 214*goodsData.length/2;
         this.state = {
-            tabListData:[],//保存每个Tab的列表高度
-            tabListHeight:50,
+            tabListData:goodsData,//保存每个Tab的列表数据
+            tabListHeight:listHeight,//保存每个Tab的列表高度
         };
-        this.tablistArray=[];//保存每个Tab对应列表数据的数组
-        this.tablistHeightArray=[];//保存每个Tab组件高度
-        this.tabListTopImage='';
-    }
-
-    componentDidMount() {
-        const tabGoodsData=this.tablistArray[0];
-        const tabHeight = this.tablistHeightArray[0];
-        this.setState({
-            tabListData:[].concat(tabGoodsData),
-            tabListHeight:tabHeight
-        })
     }
 
     renderHeyGuysRecommendItem({item}){
@@ -43,6 +37,13 @@ export default class HeyGuysRecommendComponent extends Component{
         )
     }
 
+    changeData(tabGoodsData,tabListHeight){
+        this.setState({
+            tabListData:[].concat(tabGoodsData),
+            tabListHeight:tabListHeight
+        });
+    }
+
     /**
      * 为每个item添加id
      * @param item
@@ -53,68 +54,48 @@ export default class HeyGuysRecommendComponent extends Component{
     _keyExtractor = (item, index) => index.toString();
 
     render(){
-        const data = this.props.data;
-        let items = [];
-        for (let i = 0; i < data.length; i++) {
-            const dataBean = data[i];
-            const goodsData=dataBean.goods.rows;
-            if (goodsData.length % 2 !== 0) {
-                goodsData.push(goodsData[goodsData.length-1]);
-            }
-            const listHeight = 214*goodsData.length/2+110;
-            this.tablistHeightArray.push(listHeight);
-            this.tablistArray.push(goodsData);
-            items.push(<Text key={i} tabLabel={dataBean.poolName} style={{height:1}}/>);
-            if (i === 0) {
-                this.tabListTopImage = dataBean.imgUrl;
-            }
-        }
-        //这个和android的TabLayou很像
-        let content = data.length>0?<ScrollableTabView
-            onChangeTab={obj=>{
-                const tabGoodsData=this.tablistArray[obj.i];
-                const tabHeight = this.tablistHeightArray[obj.i];
-                this.setState({
-                    tabListData:[].concat(tabGoodsData),
-                    tabListHeight:tabHeight
-                })
-            }
-            }
-            initialPage={0}
-            tabBarBackgroundColor='white'
-            //未选中状态的tab文字颜色
-            tabBarInactiveTextColor="gray"
-            //选中状态的tab文字颜色
-            tabBarActiveTextColor="black"
-            tabBarUnderlineStyle={{backgroundColor:'#FF9224',height:2}}
-            //这里要注意导包，和ScrollableTabView一起使用的
-            renderTabBar={()=><ScrollableTabBar/>}
-        >
-            {items}
-        </ScrollableTabView>:null;
-        // let content = <ScrollableTabView
+        // const data = this.props.data;
+        // let items = [];
+        // for (let i = 0; i < data.length; i++) {
+        //     const dataBean = data[i];
+        //     const goodsData=dataBean.goods.rows;
+        //     if (goodsData.length % 2 !== 0) {
+        //         goodsData.push(goodsData[goodsData.length-1]);
+        //     }
+        //     const listHeight = 214*goodsData.length/2+50;
+        //     this.tablistHeightArray.push(listHeight);
+        //     this.tablistArray.push(goodsData);
+        //     items.push(<Text key={i} tabLabel={dataBean.poolName} style={{height:1}}/>);
+        //     if (i === 0) {
+        //         this.tabListTopImage = dataBean.imgUrl;
+        //     }
+        // }
+        // //这个和android的TabLayou很像
+        // let content = data.length>0?<ScrollableTabView
         //     onChangeTab={obj=>{
         //         const tabGoodsData=this.tablistArray[obj.i];
         //         const tabHeight = this.tablistHeightArray[obj.i];
-        //         this.setState({
-        //             tabListData:[].concat(tabGoodsData),
-        //             tabListHeight:tabHeight
-        //         })
-        //     }}
-        //     renderTabBar={() => (<CustomTabBar
-        //         backgroundColor={'#f4f4f4'}
-        //         tabUnderlineDefaultWidth={20} // default containerWidth / (numberOfTabs * 4)
-        //         tabUnderlineScaleX={3} // default 3
-        //         activeColor={"#FF9224"}
-        //         inactiveColor={"#333"}
-        //     />)}>
+        //
+        //     }
+        //     }
+        //     initialPage={0}
+        //     tabBarBackgroundColor='white'
+        //     //未选中状态的tab文字颜色
+        //     tabBarInactiveTextColor="gray"
+        //     //选中状态的tab文字颜色
+        //     tabBarActiveTextColor="black"
+        //     tabBarUnderlineStyle={{backgroundColor:'#FF9224',height:2}}
+        //     //这里要注意导包，和ScrollableTabView一起使用的
+        //     renderTabBar={()=><ScrollableTabBar/>}
+        // >
         //     {items}
-        // </ScrollableTabView>;
+        // </ScrollableTabView>:null;
         return(
             <View style={{backgroundColor:'white',height:this.state.tabListHeight}}>
-                {this.tabListTopImage ? <Image style={styles.topImg} source={{uri: this.tabListTopImage}}/> : null}
-                {content}
+                {/*{this.tabListTopImage ? <Image style={styles.topImg} source={{uri: this.tabListTopImage}}/> : null}*/}
+                {/*{content}*/}
                 <FlatList
+                    ref={ref=>this.list=ref}
                     data={this.state.tabListData}
                     renderItem={data=>this.renderHeyGuysRecommendItem(data)}
                     keyExtractor={this._keyExtractor}
@@ -158,5 +139,5 @@ const styles = StyleSheet.create({
     heyguysGoodsPrice:{
         fontSize:14,
         color:'red',
-    }
+    },
 });

@@ -57,7 +57,7 @@ const Nick = createStackNavigator({
     DrawerActivity:{screen:DrawerActivity},
     FocusTest:{screen:FocusTest},
 }, {
-    initialRouteName: 'MainActivity',   
+    initialRouteName: 'HeyGuysHome',
     headerMode: 'none'
 
 });

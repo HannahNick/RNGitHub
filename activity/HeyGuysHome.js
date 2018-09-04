@@ -26,6 +26,7 @@ import BrandDayComponent from "./common/BrandDayComponent";
 import News from "./common/News";
 import HomeBanner from "./common/HomeBanner";
 import CustomPlaceholder from "./common/CustomPlaceholder";
+import TabSelectComponent from "./common/TabSelectComponent";
 
 const REQUEST_URL = "https://shop.ap-ec.cn/CMS-COMPONENTSETTING-SERVICE/cmsComponentValue/getSettingByFileId.apec2";
 
@@ -37,7 +38,11 @@ export default class HeyGuysHome extends Component {
             loaded: false,
             data: [],
             isLoading: false,
+            showTabTitle: false,
+            hasStickyTab: false,
+            stickTabIndex: 0,
         };
+        this.tabData = [];
         this.httpManager = new HttpManager(this.dataCallBack);
     }
 
@@ -45,21 +50,45 @@ export default class HeyGuysHome extends Component {
         if (success) {
             const data = result.data;
             let szCity = [];
+            let stickTabIndex = -1;
+            let hasStickyTab = false;//是否有吸顶组件
             for (let i = 0; i < data.length; i++) {
                 const content = data[i];
                 if (content.cityId === "100") {
-                    szCity.push(content);
+                    const type = content.componentType;
+                    if (type === "7_2") {
+                        szCity.push(content);
+                    } else if (type === "7_3") {
+                        szCity.push(content);
+                    } else if (type === "6") {
+                        szCity.push(content);
+                    } else if (type === "4_1") {
+                        szCity.push(content);
+                    } else if (type === "5") {
+                        szCity.push(content);
+                    } else if (type === "8") {
+                        szCity.push(content);
+                        const newContent = {...content,componentType:"8_1"};
+                        szCity.push(newContent);
+                        hasStickyTab = true;
+                        stickTabIndex = i;
+                    } else if (type === "3") {
+                        szCity.push(content);
+                    } else if (type === "2") {
+                        szCity.push(content);
+                    }
                 }
             }
             this.setState({
                 data: [].concat(szCity),
-                loaded: true,
+                hasStickyTab: hasStickyTab,
+                stickTabIndex: szCity.length-2,
             });
         } else {
-            Alert.alert(result);
+            Alert.alert(result.data);
         }
         this.setState({
-            isLoading: false,
+            loaded: true,
         })
     };
 
@@ -93,10 +122,11 @@ export default class HeyGuysHome extends Component {
                         } else if (type === "3") {
                             szCity.push(content);
                         } else if (type === "2") {
-                            szCity.push(content)
+                            szCity.push(content);
                         }
                     }
                 }
+                this.tabData = [].concat(szCity);
                 this.setState({
                     data: [].concat(szCity),
                     loaded: true,
@@ -153,7 +183,16 @@ export default class HeyGuysHome extends Component {
      * @returns {*}
      */
     getHeyGuysRecommendType(data) {
-        return (<HeyGuysRecommendComponent data={data}/>)
+        return (<HeyGuysRecommendComponent data={data} ref={(ref) => this.list = ref}/>)
+    }
+
+    /**
+     * 吸顶Tab
+     * @param data
+     * @returns {*}
+     */
+    getTabLayout(data) {
+        return (<TabSelectComponent data={data} listDataCallBackListener={this.changeListData}/>)
     }
 
     /**
@@ -191,6 +230,8 @@ export default class HeyGuysHome extends Component {
         } else if (type === "5") {
             return this.getBrandDayType(item.groups);
         } else if (type === "8") {
+            return this.getTabLayout(item.groups);
+        } else if (type === "8_1") {
             return this.getHeyGuysRecommendType(item.groups);
         } else if (type === "3") {
             return this.getNews(item.groups);
@@ -214,12 +255,24 @@ export default class HeyGuysHome extends Component {
         )
     }
 
+    /**
+     * 点击顶部Tab切换数据
+     * @param tabGoodsData
+     * @param tabHeight
+     */
+    changeListData = (tabGoodsData, tabHeight) => {
+        this.parentList.scrollToIndex({viewPosition:0,index:this.state.stickTabIndex});
+        this.list.changeData(tabGoodsData, tabHeight);
+    };
+
+    /**
+     * 下拉刷新
+     */
     loadData() {
         this.setState({
             isLoading: true,
         });
         this.doPost(REQUEST_URL);
-
     }
 
     /**
@@ -240,7 +293,6 @@ export default class HeyGuysHome extends Component {
      */
     _keyExtractor = (item, index) => index.toString();
 
-
     render() {
         if (!this.state.loaded) {
             return this.renderLoadingView();
@@ -248,10 +300,11 @@ export default class HeyGuysHome extends Component {
         return (
             <FlatList
                 data={this.state.data}
-                extraData={this.state}
+                ref={ref=>this.parentList=ref}
                 renderItem={(data) => this.renderItemView(data)}
                 style={styles.list}
                 keyExtractor={this._keyExtractor}
+                stickyHeaderIndices={this.state.hasStickyTab?[this.state.stickTabIndex]:[100]}
                 showsVerticalScrollIndicator={false}
                 refreshControl={//自定义刷新组件
                     <RefreshControl
@@ -274,8 +327,8 @@ export default class HeyGuysHome extends Component {
 }
 
 const styles = StyleSheet.create({
-    contain:{
-        flex:1,
+    contain: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -290,6 +343,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#F5FCFF"
     },
-
+    tabLayout: {
+        height: 50,
+        position: 'absolute'
+    },
 
 });
